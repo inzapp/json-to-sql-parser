@@ -2,8 +2,12 @@ package com.inzapp.jsonToSqlParser.core;
 
 import com.inzapp.jsonToSqlParser.config.JsonKey;
 import com.inzapp.jsonToSqlParser.core.json.JsonManager;
+import net.sf.jsqlparser.expression.Expression;
+import net.sf.jsqlparser.expression.ExpressionVisitor;
+import net.sf.jsqlparser.expression.operators.relational.ExpressionList;
 import net.sf.jsqlparser.expression.operators.relational.ItemsList;
 import net.sf.jsqlparser.expression.operators.relational.ItemsListVisitor;
+import net.sf.jsqlparser.parser.SimpleNode;
 import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.schema.Table;
 import net.sf.jsqlparser.statement.Statement;
@@ -67,14 +71,36 @@ public class DeParser extends JsonManager {
 
         // add values
         List<String> values = getFromJson(JsonKey.VALUE);
-        values.forEach(value -> {
-            ItemsList itemsList = new ItemsList() {
-                @Override
-                public void accept(ItemsListVisitor itemsListVisitor) {
-                    
-                }
-            }
-        });
+        if(values != null) {
+            List<Expression> expressions = new ArrayList<>();
+            values.forEach(value -> {
+                Expression expression = new Expression() {
+                    @Override
+                    public SimpleNode getASTNode() {
+                        return null;
+                    }
+
+                    @Override
+                    public void setASTNode(SimpleNode simpleNode) {
+                        // empty
+                    }
+
+                    @Override
+                    public void accept(ExpressionVisitor expressionVisitor) {
+                        // empty
+                    }
+
+                    @Override
+                    public String toString() {
+                        return value;
+                    }
+                };
+                expressions.add(expression);
+            });
+
+            ExpressionList expressionList = new ExpressionList(expressions);
+            insert.setItemsList(expressionList);
+        }
 
         return insert;
     }

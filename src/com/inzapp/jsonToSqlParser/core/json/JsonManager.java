@@ -18,7 +18,6 @@ public class JsonManager {
             JSONArray jsonArray = (JSONArray) this.json.get(jsonKey);
             return convertJsonArrayToList(jsonArray);
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -30,7 +29,6 @@ public class JsonManager {
                 list.add((String) jsonArray.get(i));
             return list;
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
