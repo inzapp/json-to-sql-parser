@@ -7,7 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JsonManager {
-    protected JSONObject json;
+    private JSONObject json;
+
+    protected void injectJson(JSONObject json) {
+        this.json = json;
+    }
 
     protected List<String> getFromJson(String jsonKey) {
         try {

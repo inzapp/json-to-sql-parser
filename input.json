@@ -1,5 +1,5 @@
 {
-  "COLUMN": ["*"],
-  "CRUD": ["SELECT"],
-  "TABLE": ["TAB"]
+  "CRUD": ["INSERT"],
+  "TABLE": ["TABLENAME"],
+  "VALUE": ["'TESTVALUE'"]
 }
