@@ -1,0 +1,5 @@
+{
+  "COLUMN": ["*"],
+  "CRUD": ["SELECT"],
+  "TABLE": ["TAB"]
+}
