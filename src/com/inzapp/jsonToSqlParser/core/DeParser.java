@@ -5,8 +5,6 @@ import com.inzapp.jsonToSqlParser.core.json.JsonManager;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.ExpressionVisitor;
 import net.sf.jsqlparser.expression.operators.relational.ExpressionList;
-import net.sf.jsqlparser.expression.operators.relational.ItemsList;
-import net.sf.jsqlparser.expression.operators.relational.ItemsListVisitor;
 import net.sf.jsqlparser.parser.SimpleNode;
 import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.schema.Table;
@@ -54,14 +52,14 @@ public class DeParser extends JsonManager {
     private Insert getInsert() {
         Insert insert = new Insert();
 
-        // add table
+        // table
         List<String> tables = getFromJson(JsonKey.FROM);
         if (tables != null) {
             String tableName = tables.get(0);
             insert.setTable(new Table(tableName));
         }
 
-        // add columns
+        // columns
         List<String> columns = getFromJson(JsonKey.COLUMN);
         if (columns != null) {
             List<Column> columnList = new ArrayList<>();
@@ -69,9 +67,9 @@ public class DeParser extends JsonManager {
             insert.setColumns(columnList);
         }
 
-        // add values
+        // values
         List<String> values = getFromJson(JsonKey.VALUE);
-        if(values != null) {
+        if (values != null) {
             List<Expression> expressions = new ArrayList<>();
             values.forEach(value -> {
                 Expression expression = new Expression() {
@@ -110,7 +108,85 @@ public class DeParser extends JsonManager {
     }
 
     private Update getUpdate() {
-        return null;
+        Update update = new Update();
+
+        // columns
+        List<String> columns = getFromJson(JsonKey.COLUMN);
+        if (columns != null) {
+            List<Column> columnList = new ArrayList<>();
+            columns.forEach(column -> columnList.add(new Column(column)));
+            update.setColumns(columnList);
+        }
+
+        // tables
+        List<String> tables = getFromJson(JsonKey.FROM);
+        if (tables != null) {
+            List<Table> tableList = new ArrayList<>();
+            tables.forEach(table -> tableList.add(new Table(table)));
+            update.setTables(tableList);
+        }
+
+        // values
+        List<String> values = getFromJson(JsonKey.VALUE);
+        if (values != null) {
+            List<Expression> expressionList = new ArrayList<>();
+            values.forEach(value -> {
+                Expression expression = new Expression() {
+                    @Override
+                    public void accept(ExpressionVisitor expressionVisitor) {
+                        // empty
+                    }
+
+                    @Override
+                    public SimpleNode getASTNode() {
+                        return null;
+                    }
+
+                    @Override
+                    public void setASTNode(SimpleNode simpleNode) {
+                        // empty
+                    }
+
+                    @Override
+                    public String toString() {
+                        return value;
+                    }
+                };
+
+                expressionList.add(expression);
+            });
+            update.setExpressions(expressionList);
+        }
+
+        // where
+        List<String> wheres = getFromJson(JsonKey.WHERE);
+        if (wheres != null) {
+            Expression whereExpression = new Expression() {
+                @Override
+                public void accept(ExpressionVisitor expressionVisitor) {
+                    // empty
+                }
+
+                @Override
+                public SimpleNode getASTNode() {
+                    return null;
+                }
+
+                @Override
+                public void setASTNode(SimpleNode simpleNode) {
+                    // empty
+                }
+
+                @Override
+                public String toString() {
+                    return wheres.get(0);
+                }
+            };
+
+            update.setWhere(whereExpression);
+        }
+
+        return update;
     }
 
     private Delete getDelete() {
