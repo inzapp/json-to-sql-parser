@@ -421,10 +421,10 @@
         "E.c"
     ],
     "CRUD": ["SELECT"],
-    "JOIN 1": ["LEFT OUTER JOIN table_resource ON A.select_id = C.select_id"],
+    "JOIN 1": ["LEFT OUTER JOIN table_resource C ON A.select_id = C.select_id"],
     "JOIN 2": [
-        "INNER JOIN item ON A.id = D.id",
-        "INNER JOIN table_item ON D.c = E.c"
+        "INNER JOIN item D ON A.id = D.id",
+        "INNER JOIN table_item E ON D.c = E.c"
     ],
     "JOIN ALIAS 1": ["C"],
     "JOIN ALIAS 2": [
@@ -441,8 +441,8 @@
             "B.id"
         ],
         "CRUD": ["SELECT"],
-        "JOIN 1": ["INNER JOIN joinTable ON A.id = B.id"],
-        "JOIN 2": ["INNER JOIN joinTable2 ON B.id2 = C.id2"],
+        "JOIN 1": ["INNER JOIN joinTable B ON A.id = B.id"],
+        "JOIN 2": ["INNER JOIN joinTable2 C ON B.id2 = C.id2"],
         "JOIN ALIAS 1": ["B"],
         "JOIN ALIAS 2": ["C"],
         "TABLE": ["table"],
