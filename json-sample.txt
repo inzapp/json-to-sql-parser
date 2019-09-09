@@ -1,0 +1,474 @@
+{
+    "COLUMN": ["*"],
+    "CRUD": ["SELECT"],
+    "TABLE": ["TAB"]
+}
+
+
+------------------------------------------------------------------------------------
+
+
+{
+    "CRUD": ["INSERT"],
+    "TABLE": ["TABLENAME"],
+    "VALUE": ["'TESTVALUE'"]
+}
+
+
+------------------------------------------------------------------------------------
+
+
+{
+    "COLUMN": ["COLNAME"],
+    "CRUD": ["UPDATE"],
+    "TABLE": ["TABLENAME"],
+    "VALUE": ["1"],
+    "WHERE": ["CONDITION = 2"]
+}
+
+
+------------------------------------------------------------------------------------
+
+
+{
+    "CRUD": ["DELETE"],
+    "TABLE": ["TABLE"],
+    "WHERE": ["CONDITION = 'ALL'"]
+}
+
+
+------------------------------------------------------------------------------------
+
+
+{
+    "CRUD": ["DELETE"],
+    "TABLE": ["TABLE"],
+    "WHERE": ["CONDITION = 'ALL' AND VALUE = (SELECT VALUE FROM TAB)"],
+    "WHERE SUB QUERY 1": ["(SELECT VALUE FROM TAB)"],
+    "WHERE SUB QUERY ANALYSE 1": {
+        "COLUMN": ["VALUE"],
+        "CRUD": ["SELECT"],
+        "TABLE": ["TAB"]
+    }
+}
+
+
+------------------------------------------------------------------------------------
+
+
+{
+    "COLUMN": [
+        "ORG_ID",
+        "ORG_NM"
+    ],
+    "CRUD": ["SELECT"],
+    "ORDER_BY": ["ORG_SORT"],
+    "TABLE": ["OM_ORGANIZATION"],
+    "WHERE": ["ORG_LEVEL = '3' AND (TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN ORG_STA_YMD AND END_YMD)"]
+}
+
+
+------------------------------------------------------------------------------------
+
+
+{
+    "COLUMN": [
+        "EC_CLPS_DV_CD AS STAFF_GBN",
+        "EC_NM AS STAFF_CLASS",
+        "EC_GRP AS ORG_STAFF_GBN",
+        "ODR AS ORDER_SEQ",
+        "ORGZ_ID AS ORG_ID",
+        "EMP_NO AS STAFF_EMP_ID",
+        "USE_AYN AS USE_YN",
+        "REG_DTM",
+        "RGR_ID",
+        "UPDT_DTM",
+        "UTUR_ID"
+    ],
+    "CRUD": ["SELECT"],
+    "ORDER_BY": ["ODR"],
+    "TABLE": ["ETCH005M"],
+    "WHERE": ["EC_CLPS_DV_CD IN (SELECT EC_DV AS staff_gbn FROM ETCH004M WHERE (TO_DATE(SCH_REG_DT, 'YYYY-MM-DD') BETWEEN TO_DATE(SYSDATE, 'YYYY-MM-DD') AND TO_DATE(SYSDATE, 'YYYY-MM-DD')) GROUP BY EC_DV UNION SELECT EC_CLPS_DV_CD AS staff_gbn FROM ETCH005M WHERE NVL(USE_AYN, 'Y') <> 'N')"],
+    "WHERE SUB QUERY 1": ["(SELECT EC_DV AS staff_gbn FROM ETCH004M WHERE (TO_DATE(SCH_REG_DT, 'YYYY-MM-DD') BETWEEN TO_DATE(SYSDATE, 'YYYY-MM-DD') AND TO_DATE(SYSDATE, 'YYYY-MM-DD')) GROUP BY EC_DV UNION SELECT EC_CLPS_DV_CD AS staff_gbn FROM ETCH005M WHERE NVL(USE_AYN, 'Y') <> 'N')"],
+    "WHERE SUB QUERY ANALYSE 1": {
+        "CRUD": ["SELECT"],
+        "WHERE SUB QUERY 1": ["SELECT EC_DV AS staff_gbn FROM ETCH004M WHERE (TO_DATE(SCH_REG_DT, 'YYYY-MM-DD') BETWEEN TO_DATE(SYSDATE, 'YYYY-MM-DD') AND TO_DATE(SYSDATE, 'YYYY-MM-DD')) GROUP BY EC_DV UNION SELECT EC_CLPS_DV_CD AS staff_gbn FROM ETCH005M WHERE NVL(USE_AYN, 'Y') <> 'N'"],
+        "WHERE SUB QUERY ANALYSE 1": {
+            "CRUD": ["SELECT"],
+            "WHERE SUB QUERY 1": ["SELECT EC_DV AS staff_gbn FROM ETCH004M WHERE (TO_DATE(SCH_REG_DT, 'YYYY-MM-DD') BETWEEN TO_DATE(SYSDATE, 'YYYY-MM-DD') AND TO_DATE(SYSDATE, 'YYYY-MM-DD')) GROUP BY EC_DV"],
+            "WHERE SUB QUERY 2": ["SELECT EC_CLPS_DV_CD AS staff_gbn FROM ETCH005M WHERE NVL(USE_AYN, 'Y') <> 'N'"],
+            "WHERE SUB QUERY ANALYSE 1": {
+                "COLUMN": ["EC_DV AS staff_gbn"],
+                "CRUD": ["SELECT"],
+                "GROUP_BY": ["GROUP BY EC_DV"],
+                "TABLE": ["ETCH004M"],
+                "WHERE": ["(TO_DATE(SCH_REG_DT, 'YYYY-MM-DD') BETWEEN TO_DATE(SYSDATE, 'YYYY-MM-DD') AND TO_DATE(SYSDATE, 'YYYY-MM-DD'))"]
+            },
+            "WHERE SUB QUERY ANALYSE 2": {
+                "COLUMN": ["EC_CLPS_DV_CD AS staff_gbn"],
+                "CRUD": ["SELECT"],
+                "TABLE": ["ETCH005M"],
+                "WHERE": ["NVL(USE_AYN, 'Y') <> 'N'"]
+            }
+        }
+    }
+}
+
+
+------------------------------------------------------------------------------------
+
+
+{
+    "COLUMN": [
+        "REG_NO AS REGIS_SEQNO",
+        "to_char(REG_DTM, 'yyyy-MM-dd') AS REGIS_DT",
+        "to_char(REG_DTM, 'HH24miss') AS REGIS_TM",
+        "to_char(UPDT_DTM, 'yyyyMMdd') AS MODIFY_DT",
+        "to_char(UPDT_DTM, 'HH24miss') AS MODIFY_TIME",
+        "RGR_ID AS REGIS_ID",
+        "RGR_NM AS REGIS_NAME",
+        "ANW_NM AS REPLY_NAME",
+        "ANW_ID AS REPLY_ID",
+        "ANS_DT AS REPLY_DT",
+        "TXT AS CONTENTS",
+        "NVL(ATC_FL, '') AS ACCTFILE",
+        "NTT_TYP AS BOARD_TYPE",
+        "TITL AS TITLE",
+        "INQ_CNT AS CNT",
+        "COUNT(*) OVER () AS TOTAL_CNT"
+    ],
+    "CRUD": ["SELECT"],
+    "TABLE": ["ETCH002M"],
+    "WHERE": ["MASKING_YB = 'Y'"]
+}
+
+
+------------------------------------------------------------------------------------
+
+{
+    "COLUMN": ["MASKING_YB"],
+    "CRUD": ["UPDATE"],
+    "TABLE": ["ETCH002M"],
+    "VALUE": ["'N'"],
+    "WHERE": ["MASKING_YB = 'Y'"]
+}
+
+------------------------------------------------------------------------------------
+
+{
+    "COLUMN": [
+        "updt_dtm",
+        "utur_id",
+        "anw_nm",
+        "anw_id",
+        "ans_dt",
+        "txt",
+        "atc_fl",
+        "titl"
+    ],
+    "CRUD": ["UPDATE"],
+    "TABLE": ["etch002m"],
+    "VALUE": [
+        "SYSDATE",
+        "0912026",
+        "''",
+        "''",
+        "''",
+        "'<p>testㅏ<\/p><p><br><\/p><p>asd,asdfaasd~!@#%@W%sdfsdfsdd\"\"\"\"''''<\/p>'",
+        "''",
+        "test"
+    ],
+    "WHERE": ["reg_no = 24831"]
+}
+
+------------------------------------------------------------------------------------
+
+{
+    "COLUMN": [
+        "tsk_no",
+        "dept_cd",
+        "tsk_dv_cd",
+        "tsk_nm",
+        "oppb_gd_cd",
+        "txt",
+        "stt_dtm",
+        "end_dtm",
+        "rgr_id",
+        "reg_dtm",
+        "utur_id",
+        "updt_dtm"
+    ],
+    "CRUD": ["INSERT"],
+    "TABLE": ["etob004m"],
+    "VALUE": [
+        "'2019-00436'",
+        "'015000'",
+        "'001'",
+        "'test'",
+        "'001'",
+        "'<p>123<\/p>'",
+        "TO_DATE('2019-08-08 09:00:00', 'yyyy-MM-dd HH24:mi:ss')",
+        "TO_DATE('2019-08-08 18:00:00', 'yyyy-MM-dd HH24:mi:ss')",
+        "'1507030'",
+        "SYSDATE",
+        "'1507030'",
+        "SYSDATE"
+    ]
+}
+
+------------------------------------------------------------------------------------
+
+{
+    "CRUD": ["DELETE"],
+    "TABLE": ["ETCH006M"],
+    "WHERE": ["EMP_NO IN ('123', '124', '125', '126', '127', '128')"]
+}
+
+------------------------------------------------------------------------------------\
+
+{
+    "CRUD": ["DELETE"],
+    "TABLE": ["ETCH009M"],
+    "WHERE": ["PK_SEQ = '2019-00370'"]
+}
+
+------------------------------------------------------------------------------------
+
+{
+    "COLUMN": [
+        "ROWNUM ROW_NUMBER",
+        "seq",
+        "TO_CHAR(regdate, 'YYYY-MM-DD HH24:mi') AS regdate",
+        "content",
+        "subject",
+        "send_email",
+        "send_flag",
+        "send_name",
+        "dept_code",
+        "dept_name",
+        "list_seq",
+        "email",
+        "NAME",
+        "send_date"
+    ],
+    "CRUD": ["SELECT"],
+    "TABLE": ["(SELECT a.seq, a.regdate, a.content, a.subject, a.send_email, a.send_flag, a.send_name, a.dept_code, a.dept_name, b.list_seq, b.email, b.NAME, b.send_date FROM ev_send_form a INNER JOIN ev_send_list b ON a.seq = b.seq ORDER BY a.seq DESC, list_seq)"],
+    "TABLE SUB QUERY 1": ["(SELECT a.seq, a.regdate, a.content, a.subject, a.send_email, a.send_flag, a.send_name, a.dept_code, a.dept_name, b.list_seq, b.email, b.NAME, b.send_date FROM ev_send_form a INNER JOIN ev_send_list b ON a.seq = b.seq ORDER BY a.seq DESC, list_seq)"],
+    "TABLE SUB QUERY ANALYSE 1": {
+        "COLUMN": [
+            "a.seq",
+            "a.regdate",
+            "a.content",
+            "a.subject",
+            "a.send_email",
+            "a.send_flag",
+            "a.send_name",
+            "a.dept_code",
+            "a.dept_name",
+            "b.list_seq",
+            "b.email",
+            "b.NAME",
+            "b.send_date"
+        ],
+        "CRUD": ["SELECT"],
+        "JOIN 1": ["INNER JOIN ev_send_list ON a.seq = b.seq"],
+        "JOIN ALIAS 1": ["b"],
+        "ORDER_BY": [
+            "a.seq DESC",
+            "list_seq"
+        ],
+        "TABLE": ["ev_send_form"],
+        "TABLE ALIAS": ["a"]
+    }
+}
+
+------------------------------------------------------------------------------------
+
+{
+    "COLUMN": ["COUNT(*)"],
+    "CRUD": ["SELECT"],
+    "TABLE": ["etch013m"],
+    "WHERE": ["rgr_id = '1507030' AND reg_no = NVL((SELECT reg_no FROM etch002m WHERE masking_yb = 'Y'), -1) AND reg_dtm + 7 > SYSDATE"],
+    "WHERE SUB QUERY 1": ["(SELECT reg_no FROM etch002m WHERE masking_yb = 'Y')"],
+    "WHERE SUB QUERY ANALYSE 1": {
+        "COLUMN": ["reg_no"],
+        "CRUD": ["SELECT"],
+        "TABLE": ["etch002m"],
+        "WHERE": ["masking_yb = 'Y'"]
+    }
+}
+
+------------------------------------------------------------------------------------
+
+{
+    "COLUMN": ["COUNT(*)"],
+    "CRUD": ["SELECT"],
+    "TABLE": ["etch013m"],
+    "WHERE": ["rgr_id = '1507030' AND reg_no = NVL((SELECT reg_no FROM etch002m WHERE masking_yb = 'Y'), -1) AND reg_no2 = NVL((SELECT reg_no FROM etch002m WHERE masking_yb = 'Y'), -1)"],
+    "WHERE SUB QUERY 1": ["(SELECT reg_no FROM etch002m WHERE masking_yb = 'Y')"],
+    "WHERE SUB QUERY 2": ["(SELECT reg_no FROM etch002m WHERE masking_yb = 'Y')"],
+    "WHERE SUB QUERY ANALYSE 1": {
+        "COLUMN": ["reg_no"],
+        "CRUD": ["SELECT"],
+        "TABLE": ["etch002m"],
+        "WHERE": ["masking_yb = 'Y'"]
+    },
+    "WHERE SUB QUERY ANALYSE 2": {
+        "COLUMN": ["reg_no"],
+        "CRUD": ["SELECT"],
+        "TABLE": ["etch002m"],
+        "WHERE": ["masking_yb = 'Y'"]
+    }
+}
+
+------------------------------------------------------------------------------------
+
+{
+    "COLUMN": ["COUNT(*)"],
+    "CRUD": ["SELECT"],
+    "TABLE": ["(SELECT * FROM etch002m WHERE masking_yb = 'Y')"],
+    "TABLE SUB QUERY 1": ["(SELECT * FROM etch002m WHERE masking_yb = 'Y')"],
+    "TABLE SUB QUERY ANALYSE 1": {
+        "COLUMN": ["*"],
+        "CRUD": ["SELECT"],
+        "TABLE": ["etch002m"],
+        "WHERE": ["masking_yb = 'Y'"]
+    },
+    "WHERE": ["rgr_id = '1507030' AND reg_no = NVL((SELECT reg_no FROM etch002m WHERE masking_yb = 'Y'), -1) AND reg_no2 = NVL((SELECT reg_no FROM etch002m WHERE masking_yb = 'Y'), -1)"],
+    "WHERE SUB QUERY 1": ["(SELECT reg_no FROM etch002m WHERE masking_yb = 'Y')"],
+    "WHERE SUB QUERY 2": ["(SELECT reg_no FROM etch002m WHERE masking_yb = 'Y')"],
+    "WHERE SUB QUERY ANALYSE 1": {
+        "COLUMN": ["reg_no"],
+        "CRUD": ["SELECT"],
+        "TABLE": ["etch002m"],
+        "WHERE": ["masking_yb = 'Y'"]
+    },
+    "WHERE SUB QUERY ANALYSE 2": {
+        "COLUMN": ["reg_no"],
+        "CRUD": ["SELECT"],
+        "TABLE": ["etch002m"],
+        "WHERE": ["masking_yb = 'Y'"]
+    }
+}
+
+------------------------------------------------------------------------------------
+
+{
+    "COLUMN": [
+        "A",
+        "B"
+    ],
+    "CRUD": ["SELECT"],
+    "ORDER_BY": ["A"],
+    "TABLE": ["(SELECT A, B FROM FROMTABLE WHERE SUBCONDITION = 'SUBCONDITION')"],
+    "TABLE SUB QUERY 1": ["(SELECT A, B FROM FROMTABLE WHERE SUBCONDITION = 'SUBCONDITION')"],
+    "TABLE SUB QUERY ANALYSE 1": {
+        "COLUMN": [
+            "A",
+            "B"
+        ],
+        "CRUD": ["SELECT"],
+        "TABLE": ["FROMTABLE"],
+        "WHERE": ["SUBCONDITION = 'SUBCONDITION'"]
+    },
+    "WHERE": ["C = (SELECT C FROM WHERETABLE WHERE WHERECONDITION = 'WHERECONDITION')"],
+    "WHERE SUB QUERY 1": ["(SELECT C FROM WHERETABLE WHERE WHERECONDITION = 'WHERECONDITION')"],
+    "WHERE SUB QUERY ANALYSE 1": {
+        "COLUMN": ["C"],
+        "CRUD": ["SELECT"],
+        "TABLE": ["WHERETABLE"],
+        "WHERE": ["WHERECONDITION = 'WHERECONDITION'"]
+    }
+}
+
+------------------------------------------------------------------------------------
+
+{
+    "COLUMN": [
+        "AAA.EQUIP_ID",
+        "C.SESSION_ID",
+        "E.COLLECT_ITEM_ID"
+    ],
+    "CRUD": ["SELECT"],
+    "JOIN 1": ["LEFT OUTER JOIN TB_RESOURCE ON AAA.SECTOR_ID = C.SECTOR_ID"],
+    "JOIN 2": [
+        "INNER JOIN TB_EQUIP_ITEM ON AAA.EQUIP_MODEL_ID = D.EQUIP_MODEL_ID",
+        "INNER JOIN TB_EQUIP_COLLECT_ITEM ON D.COLLECT_ITEM_ID = E.COLLECT_ITEM_ID"
+    ],
+    "JOIN ALIAS 1": ["C"],
+    "JOIN ALIAS 2": [
+        "D",
+        "E"
+    ],
+    "TABLE": ["(SELECT A.EQUIP_ID, A.SECTOR_ID, B.EQUIP_MODEL_ID FROM TB_EQUIP A INNER JOIN TB_EQUIP_MODEL B ON A.EQUIP_MODEL_ID = B.EQUIP_MODEL_ID INNER JOIN TB_EQUIP_TYPE C ON B.EQUIP_TYPE_ID = C.EQUIP_TYPE_ID WHERE A.USE_YN = 'Y' AND C.EQUIP_TYPE_ID = 'equipTypeId' AND A.SECTOR_ID = (SELECT SECTOR_ID FROM TB_SECTOR WHERE CONTAINER_NAME = 'containerName' AND GATEWAY = 'gateway' AND CONTAINER = 'container'))"],
+    "TABLE ALIAS": ["AAA"],
+    "TABLE SUB QUERY 1": ["(SELECT A.EQUIP_ID, A.SECTOR_ID, B.EQUIP_MODEL_ID FROM TB_EQUIP A INNER JOIN TB_EQUIP_MODEL B ON A.EQUIP_MODEL_ID = B.EQUIP_MODEL_ID INNER JOIN TB_EQUIP_TYPE C ON B.EQUIP_TYPE_ID = C.EQUIP_TYPE_ID WHERE A.USE_YN = 'Y' AND C.EQUIP_TYPE_ID = 'equipTypeId' AND A.SECTOR_ID = (SELECT SECTOR_ID FROM TB_SECTOR WHERE CONTAINER_NAME = 'containerName' AND GATEWAY = 'gateway' AND CONTAINER = 'container'))"],
+    "TABLE SUB QUERY ANALYSE 1": {
+        "COLUMN": [
+            "A.EQUIP_ID",
+            "A.SECTOR_ID",
+            "B.EQUIP_MODEL_ID"
+        ],
+        "CRUD": ["SELECT"],
+        "JOIN 1": ["INNER JOIN TB_EQUIP_MODEL ON A.EQUIP_MODEL_ID = B.EQUIP_MODEL_ID"],
+        "JOIN 2": ["INNER JOIN TB_EQUIP_TYPE ON B.EQUIP_TYPE_ID = C.EQUIP_TYPE_ID"],
+        "JOIN ALIAS 1": ["B"],
+        "JOIN ALIAS 2": ["C"],
+        "TABLE": ["TB_EQUIP"],
+        "TABLE ALIAS": ["A"],
+        "WHERE": ["A.USE_YN = 'Y' AND C.EQUIP_TYPE_ID = 'equipTypeId' AND A.SECTOR_ID = (SELECT SECTOR_ID FROM TB_SECTOR WHERE CONTAINER_NAME = 'containerName' AND GATEWAY = 'gateway' AND CONTAINER = 'container')"],
+        "WHERE SUB QUERY 1": ["(SELECT SECTOR_ID FROM TB_SECTOR WHERE CONTAINER_NAME = 'containerName' AND GATEWAY = 'gateway' AND CONTAINER = 'container')"],
+        "WHERE SUB QUERY ANALYSE 1": {
+            "COLUMN": ["SECTOR_ID"],
+            "CRUD": ["SELECT"],
+            "TABLE": ["TB_SECTOR"],
+            "WHERE": ["CONTAINER_NAME = 'containerName' AND GATEWAY = 'gateway' AND CONTAINER = 'container'"]
+        }
+    }
+}
+
+------------------------------------------------------------------------------------
+
+{
+    "COLUMN": [
+        "A.a",
+        "C.b",
+        "E.c"
+    ],
+    "CRUD": ["SELECT"],
+    "JOIN 1": ["LEFT OUTER JOIN table_resource ON A.select_id = C.select_id"],
+    "JOIN 2": [
+        "INNER JOIN item ON A.id = D.id",
+        "INNER JOIN table_item ON D.c = E.c"
+    ],
+    "JOIN ALIAS 1": ["C"],
+    "JOIN ALIAS 2": [
+        "D",
+        "E"
+    ],
+    "TABLE": ["(SELECT A.a, A.select_id, B.id FROM table A INNER JOIN joinTable B ON A.id = B.id INNER JOIN joinTable2 C ON B.id2 = C.id2 WHERE A.yn = 'Y' AND C.id2 = 'id' AND A.select_id = (SELECT select_id FROM selector_table WHERE c_name = 'con_name' AND gateway = 'gateway' AND CONTAINER = 'container'))"],
+    "TABLE ALIAS": ["A"],
+    "TABLE SUB QUERY 1": ["(SELECT A.a, A.select_id, B.id FROM table A INNER JOIN joinTable B ON A.id = B.id INNER JOIN joinTable2 C ON B.id2 = C.id2 WHERE A.yn = 'Y' AND C.id2 = 'id' AND A.select_id = (SELECT select_id FROM selector_table WHERE c_name = 'con_name' AND gateway = 'gateway' AND CONTAINER = 'container'))"],
+    "TABLE SUB QUERY ANALYSE 1": {
+        "COLUMN": [
+            "A.a",
+            "A.select_id",
+            "B.id"
+        ],
+        "CRUD": ["SELECT"],
+        "JOIN 1": ["INNER JOIN joinTable ON A.id = B.id"],
+        "JOIN 2": ["INNER JOIN joinTable2 ON B.id2 = C.id2"],
+        "JOIN ALIAS 1": ["B"],
+        "JOIN ALIAS 2": ["C"],
+        "TABLE": ["table"],
+        "TABLE ALIAS": ["A"],
+        "WHERE": ["A.yn = 'Y' AND C.id2 = 'id' AND A.select_id = (SELECT select_id FROM selector_table WHERE c_name = 'con_name' AND gateway = 'gateway' AND CONTAINER = 'container')"],
+        "WHERE SUB QUERY 1": ["(SELECT select_id FROM selector_table WHERE c_name = 'con_name' AND gateway = 'gateway' AND CONTAINER = 'container')"],
+        "WHERE SUB QUERY ANALYSE 1": {
+            "COLUMN": ["select_id"],
+            "CRUD": ["SELECT"],
+            "TABLE": ["selector_table"],
+            "WHERE": ["c_name = 'con_name' AND gateway = 'gateway' AND CONTAINER = 'container'"]
+        }
+    }
+}
