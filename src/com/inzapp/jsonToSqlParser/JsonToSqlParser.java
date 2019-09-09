@@ -19,18 +19,31 @@ public class JsonToSqlParser extends DeParser {
 
         JsonToSqlParser jsonToSqlParser = new JsonToSqlParser();
         JSONObject json = jsonToSqlParser.readJsonFromFile(inputFileName);
+        if(json == null) {
+            System.out.println("failed to load json");
+            return;
+        }
+
         String sql = jsonToSqlParser.deParse(json);
+        if(sql == null) {
+            System.out.println("parse failure");
+            return;
+        }
 
         try {
-            System.out.println("input json\n\n");
+            System.out.println("input json\n");
             System.out.println(json.toString(4));
-            System.out.println("output sql\n\n");
+            System.out.println();
+
+            System.out.println("output sql\n");
             System.out.println(sql);
+            System.out.println();
         }catch(Exception e) {
             e.printStackTrace();
         }
 
         jsonToSqlParser.saveFile(sql, outputFileName);
+        System.out.println("parse success");
     }
 
     private JSONObject readJsonFromFile(String fileName) {
@@ -46,9 +59,9 @@ public class JsonToSqlParser extends DeParser {
             }
 
             String jsonString = sb.toString();
-            JSONObject json = new JSONObject(jsonString);
-            return json;
+            return new JSONObject(jsonString);
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }
