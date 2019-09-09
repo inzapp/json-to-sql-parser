@@ -190,6 +190,41 @@ public class DeParser extends JsonManager {
     }
 
     private Delete getDelete() {
-        return null;
+        Delete delete = new Delete();
+
+        // table
+        List<String> tables = getFromJson(JsonKey.FROM);
+        if (tables != null)
+            delete.setTable(new Table(tables.get(0)));
+
+        // where
+        List<String> wheres = getFromJson(JsonKey.WHERE);
+        if(wheres != null) {
+            Expression whereExpression = new Expression() {
+                @Override
+                public void accept(ExpressionVisitor expressionVisitor) {
+                    // empty
+                }
+
+                @Override
+                public SimpleNode getASTNode() {
+                    return null;
+                }
+
+                @Override
+                public void setASTNode(SimpleNode simpleNode) {
+                    // empty
+                }
+
+                @Override
+                public String toString() {
+                    return wheres.get(0);
+                }
+            };
+
+            delete.setWhere(whereExpression);
+        }
+
+        return delete;
     }
 }

@@ -1,25 +1,5 @@
 {
-  "COLUMN": [
-    "updt_dtm",
-    "utur_id",
-    "anw_nm",
-    "anw_id",
-    "ans_dt",
-    "txt",
-    "atc_fl",
-    "titl"
-  ],
-  "CRUD": ["UPDATE"],
-  "TABLE": ["etch002m"],
-  "VALUE": [
-    "SYSDATE",
-    "0912026",
-    "''",
-    "''",
-    "''",
-    "'<p>testㅏ<\/p><p><br><\/p><p>asd,asdfaasd~!@#%@W%sdfsdfsdd\"\"\"\"''''<\/p>'",
-    "''",
-    "test"
-  ],
-  "WHERE": ["reg_no = 24831"]
+  "CRUD": ["DELETE"],
+  "TABLE": ["ETCH009M"],
+  "WHERE": ["PK_SEQ = '2019-00370'"]
 }
