@@ -16,7 +16,6 @@ import net.sf.jsqlparser.statement.select.*;
 import net.sf.jsqlparser.statement.update.Update;
 import org.json.JSONObject;
 
-import java.security.acl.Group;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -243,7 +242,7 @@ public class DeParser extends JsonManager {
 
         // order by
         List<String> orderBys = getFromJson(JsonKey.ORDER_BY);
-        if(orderBys != null) {
+        if (orderBys != null) {
             List<OrderByElement> orderByElementList = new ArrayList<>();
             orderBys.forEach(orderBy -> {
                 OrderByElement orderByElement = new OrderByElement();
@@ -277,9 +276,9 @@ public class DeParser extends JsonManager {
         // joins
         int idx = 1;
         List<Join> joinList = new ArrayList<>();
-        while(true) {
+        while (true) {
             List<String> joins = getFromJson(JsonKey.JOIN + idx++);
-            if(joins != null) {
+            if (joins != null) {
                 joins.forEach(joinStr -> {
                     Join join = new Join();
                     FromItem rightItem = new FromItem() {
