@@ -1,14 +1,14 @@
 package com.inzapp.jsonToSqlParser;
 
 import com.inzapp.jsonToSqlParser.config.Config;
-import com.inzapp.jsonToSqlParser.core.DeParser;
+import com.inzapp.jsonToSqlParser.core.Parser;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 
-public class JsonToSqlParser extends DeParser {
+public class JsonToSqlParser extends Parser {
     public static void main(String[] args) {
         String inputFileName = Config.INPUT_FILE_NAME;
         String outputFileName = Config.OUTPUT_FILE_NAME;
@@ -24,7 +24,7 @@ public class JsonToSqlParser extends DeParser {
             return;
         }
 
-        String sql = jsonToSqlParser.deParse(json);
+        String sql = jsonToSqlParser.parse(json);
         if(sql == null) {
             System.out.println("parse failure");
             return;

@@ -19,8 +19,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeParser extends JsonManager {
-    public String deParse(JSONObject json) {
+public class Parser extends JsonManager {
+    public String parse(JSONObject json) {
         injectJson(json);
 
         Statement statement;
@@ -47,7 +47,7 @@ public class DeParser extends JsonManager {
                 return null;
         }
 
-        return statement == null ? null : statement.toString();
+        return statement.toString();
     }
 
     private Insert getInsert() {
@@ -309,7 +309,6 @@ public class DeParser extends JsonManager {
 
                         @Override
                         public String toString() {
-                            System.out.printf("[join] [%s]\n", joinStr);
                             return joinStr;
                         }
                     };

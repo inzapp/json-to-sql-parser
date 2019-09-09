@@ -5,19 +5,21 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/input.json" beforeDir="false" afterPath="$PROJECT_DIR$/input.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/json-sample.txt" beforeDir="false" afterPath="$PROJECT_DIR$/json-sample.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/DeParser$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/DeParser$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/DeParser$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/DeParser$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/DeParser$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/DeParser$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/DeParser$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/DeParser$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/DeParser$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/DeParser$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/DeParser$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/DeParser$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/DeParser$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/DeParser$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/DeParser$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/DeParser$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/DeParser$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/DeParser$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/DeParser$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/DeParser$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/DeParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/DeParser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/JsonToSqlParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/JsonToSqlParser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/DeParser$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/DeParser$10.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/DeParser$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/DeParser$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/DeParser$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/DeParser$5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/DeParser$6.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/DeParser$7.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/DeParser$8.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/DeParser$9.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/DeParser.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/core/DeParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/core/DeParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/JsonToSqlParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/JsonToSqlParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/core/DeParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/core/Parser.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
