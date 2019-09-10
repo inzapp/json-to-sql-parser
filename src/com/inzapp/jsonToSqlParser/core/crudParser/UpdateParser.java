@@ -41,7 +41,7 @@ public class UpdateParser extends JsonManager {
         if (tables != null) {
             List<Table> tableList = new ArrayList<>();
             tables.forEach(table -> tableList.add(new Table(table)));
-            update.setTables(tableList);
+            this.update.setTables(tableList);
         }
     }
 
@@ -75,7 +75,7 @@ public class UpdateParser extends JsonManager {
 
                 expressionList.add(expression);
             });
-            update.setExpressions(expressionList);
+            this.update.setExpressions(expressionList);
         }
     }
 
@@ -105,7 +105,7 @@ public class UpdateParser extends JsonManager {
                 }
             };
 
-            update.setWhere(whereExpression);
+            this.update.setWhere(whereExpression);
         }
     }
 }

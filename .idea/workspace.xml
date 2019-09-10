@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6f48b912-9ba7-49c2-837b-6161650e479a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/core/crudParser/UpdateParser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/core/crudParser/DeleteParser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/core/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/core/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/core/crudParser/UpdateParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/core/crudParser/UpdateParser.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

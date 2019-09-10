@@ -1,6 +1,7 @@
 package com.inzapp.jsonToSqlParser.core;
 
 import com.inzapp.jsonToSqlParser.config.JsonKey;
+import com.inzapp.jsonToSqlParser.core.crudParser.DeleteParser;
 import com.inzapp.jsonToSqlParser.core.crudParser.InsertParser;
 import com.inzapp.jsonToSqlParser.core.crudParser.UpdateParser;
 import com.inzapp.jsonToSqlParser.core.json.JsonManager;
@@ -43,7 +44,7 @@ public class Parser extends JsonManager {
                 break;
 
             case JsonKey.DELETE:
-                statement = getDelete();
+                statement = new DeleteParser().parse(json);
                 break;
 
             default:
@@ -73,7 +74,7 @@ public class Parser extends JsonManager {
                 break;
 
             case JsonKey.DELETE:
-                statement = getDelete();
+                statement = new DeleteParser().parse(json);
                 break;
 
             default:
@@ -332,44 +333,5 @@ public class Parser extends JsonManager {
 
         select.setSelectBody(plainSelect);
         return select;
-    }
-
-    private Delete getDelete() {
-        Delete delete = new Delete();
-
-        // table
-        List<String> tables = getFromJson(JsonKey.FROM);
-        if (tables != null)
-            delete.setTable(new Table(tables.get(0)));
-
-        // where
-        List<String> wheres = getFromJson(JsonKey.WHERE);
-        if (wheres != null) {
-            Expression whereExpression = new Expression() {
-                @Override
-                public void accept(ExpressionVisitor expressionVisitor) {
-                    // empty
-                }
-
-                @Override
-                public SimpleNode getASTNode() {
-                    return null;
-                }
-
-                @Override
-                public void setASTNode(SimpleNode simpleNode) {
-                    // empty
-                }
-
-                @Override
-                public String toString() {
-                    return wheres.get(0);
-                }
-            };
-
-            delete.setWhere(whereExpression);
-        }
-
-        return delete;
     }
 }

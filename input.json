@@ -1,7 +1,11 @@
 {
-  "CRUD": ["UPDATE"],
-  "COLUMN": ["COLNAME"],
-  "TABLE": ["TABLENAME"],
-  "VALUE": ["1"],
-  "WHERE": ["CONDITION = 2"]
+  "CRUD": ["DELETE"],
+  "TABLE": ["TABLE"],
+  "WHERE": ["CONDITION = 'ALL' AND VALUE = (SELECT VALUE FROM TAB)"],
+  "WHERE SUB QUERY 1": ["(SELECT VALUE FROM TAB)"],
+  "WHERE SUB QUERY ANALYSE 1": {
+    "CRUD": ["SELECT"],
+    "COLUMN": ["VALUE"],
+    "TABLE": ["TAB"]
+  }
 }
