@@ -9,6 +9,10 @@ import java.util.List;
 public class JsonManager {
     private JSONObject json;
 
+    protected JSONObject getJson() {
+        return this.json;
+    }
+
     protected void injectJson(JSONObject json) {
         this.json = json;
     }
@@ -25,7 +29,7 @@ public class JsonManager {
     protected JSONObject getJsonObjectFromJson(String jsonKey) {
         try {
             return this.json.getJSONObject(jsonKey);
-        }catch(Exception e) {
+        } catch (Exception e) {
             return null;
         }
     }

@@ -53,6 +53,36 @@ public class Parser extends JsonManager {
         return statement.toString();
     }
 
+    public String parse(JSONObject json, boolean exceptUnion) {
+        injectJson(json);
+
+        Statement statement;
+        String crud = getListFromJson(JsonKey.CRUD).get(0);
+        switch (crud) {
+            case JsonKey.INSERT:
+                statement = getInsert();
+                break;
+
+            case JsonKey.SELECT:
+                statement = getSelect();
+                break;
+
+            case JsonKey.UPDATE:
+                statement = getUpdate();
+                break;
+
+            case JsonKey.DELETE:
+                statement = getDelete();
+                break;
+
+            default:
+                System.out.println("unknown crud : " + crud);
+                return null;
+        }
+
+        return statement.toString();
+    }
+
     private Insert getInsert() {
         Insert insert = new Insert();
 
@@ -113,6 +143,20 @@ public class Parser extends JsonManager {
         List<SelectBody> selectBodies = new ArrayList<>();
         List<SetOperation> setOperations = new ArrayList<>();
         // add select body of default json except union
+        String mainJsonSelectBodySql = new Parser().parse(this.getJson(), true);
+        SelectBody mainJsonSelectBody = new SelectBody(){
+            @Override
+            public void accept(SelectVisitor selectVisitor) {
+                // empty
+            }
+
+            @Override
+            public String toString() {
+                return mainJsonSelectBodySql;
+            }
+        };
+        selectBodies.add(mainJsonSelectBody);
+
         while (true) {
             brackets.add(true);
             List<String> unions = getListFromJson(JsonKey.UNION + idx);
@@ -148,7 +192,7 @@ public class Parser extends JsonManager {
         setOperationList.setBracketsOpsAndSelects(brackets, selectBodies, setOperations);
         Select select = new Select();
         select.setSelectBody(setOperationList);
-        return new Select();
+        return select;
     }
 
     private Select getSelect() {
