@@ -8,34 +8,7 @@ import org.json.JSONObject;
 
 public class Parser extends JsonManager {
     public String parse(JSONObject json) {
-        setJson(json);
-        Statement statement;
-        String crud = getFromJson(JsonKey.CRUD).get(0);
-        switch (crud) {
-            case JsonKey.INSERT:
-                statement = new InsertParser().parse(json);
-                break;
-
-            case JsonKey.SELECT:
-                if (getFromJson(JsonKey.UNION + 1) != null || getFromJson(JsonKey.UNION_ALL + 1) != null)
-                    statement = new UnionSelectParser().parse(json);
-                else statement = new SelectParser().parse(json);
-                break;
-
-            case JsonKey.UPDATE:
-                statement = new UpdateParser().parse(json);
-                break;
-
-            case JsonKey.DELETE:
-                statement = new DeleteParser().parse(json);
-                break;
-
-            default:
-                System.out.println("unknown crud : " + crud);
-                return null;
-        }
-
-        return statement.toString();
+        return parse(json, false);
     }
 
     public String parse(JSONObject json, boolean exceptUnion) {
@@ -48,7 +21,8 @@ public class Parser extends JsonManager {
                 break;
 
             case JsonKey.SELECT:
-                statement = new SelectParser().parse(json);
+                if(exceptUnion) statement = new SelectParser().parse(json);
+                else statement = new UnionSelectParser().parse(json);
                 break;
 
             case JsonKey.UPDATE:
