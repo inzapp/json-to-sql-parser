@@ -1,5 +1,7 @@
 {
-  "CRUD": ["INSERT"],
+  "CRUD": ["UPDATE"],
+  "COLUMN": ["COLNAME"],
   "TABLE": ["TABLENAME"],
-  "VALUE": ["'TESTVALUE'"]
+  "VALUE": ["1"],
+  "WHERE": ["CONDITION = 2"]
 }

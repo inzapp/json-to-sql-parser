@@ -2,6 +2,7 @@ package com.inzapp.jsonToSqlParser.core;
 
 import com.inzapp.jsonToSqlParser.config.JsonKey;
 import com.inzapp.jsonToSqlParser.core.crudParser.InsertParser;
+import com.inzapp.jsonToSqlParser.core.crudParser.UpdateParser;
 import com.inzapp.jsonToSqlParser.core.json.JsonManager;
 import net.sf.jsqlparser.expression.Alias;
 import net.sf.jsqlparser.expression.Expression;
@@ -38,7 +39,7 @@ public class Parser extends JsonManager {
                 break;
 
             case JsonKey.UPDATE:
-                statement = getUpdate();
+                statement = new UpdateParser().parse(json);
                 break;
 
             case JsonKey.DELETE:
@@ -68,7 +69,7 @@ public class Parser extends JsonManager {
                 break;
 
             case JsonKey.UPDATE:
-                statement = getUpdate();
+                statement = new UpdateParser().parse(json);
                 break;
 
             case JsonKey.DELETE:
@@ -81,60 +82,6 @@ public class Parser extends JsonManager {
         }
 
         return statement.toString();
-    }
-
-    private Insert getInsert() {
-        Insert insert = new Insert();
-
-        // table
-        List<String> tables = getFromJson(JsonKey.FROM);
-        if (tables != null) {
-            String tableName = tables.get(0);
-            insert.setTable(new Table(tableName));
-        }
-
-        // columns
-        List<String> columns = getFromJson(JsonKey.COLUMN);
-        if (columns != null) {
-            List<Column> columnList = new ArrayList<>();
-            columns.forEach(column -> columnList.add(new Column(column)));
-            insert.setColumns(columnList);
-        }
-
-        // values
-        List<String> values = getFromJson(JsonKey.VALUE);
-        if (values != null) {
-            List<Expression> expressions = new ArrayList<>();
-            values.forEach(value -> {
-                Expression expression = new Expression() {
-                    @Override
-                    public SimpleNode getASTNode() {
-                        return null;
-                    }
-
-                    @Override
-                    public void setASTNode(SimpleNode simpleNode) {
-                        // empty
-                    }
-
-                    @Override
-                    public void accept(ExpressionVisitor expressionVisitor) {
-                        // empty
-                    }
-
-                    @Override
-                    public String toString() {
-                        return value;
-                    }
-                };
-                expressions.add(expression);
-            });
-
-            ExpressionList expressionList = new ExpressionList(expressions);
-            insert.setItemsList(expressionList);
-        }
-
-        return insert;
     }
 
     private Select getUnionSelect() {
@@ -385,88 +332,6 @@ public class Parser extends JsonManager {
 
         select.setSelectBody(plainSelect);
         return select;
-    }
-
-    private Update getUpdate() {
-        Update update = new Update();
-
-        // columns
-        List<String> columns = getFromJson(JsonKey.COLUMN);
-        if (columns != null) {
-            List<Column> columnList = new ArrayList<>();
-            columns.forEach(column -> columnList.add(new Column(column)));
-            update.setColumns(columnList);
-        }
-
-        // tables
-        List<String> tables = getFromJson(JsonKey.FROM);
-        if (tables != null) {
-            List<Table> tableList = new ArrayList<>();
-            tables.forEach(table -> tableList.add(new Table(table)));
-            update.setTables(tableList);
-        }
-
-        // values
-        List<String> values = getFromJson(JsonKey.VALUE);
-        if (values != null) {
-            List<Expression> expressionList = new ArrayList<>();
-            values.forEach(value -> {
-                Expression expression = new Expression() {
-                    @Override
-                    public void accept(ExpressionVisitor expressionVisitor) {
-                        // empty
-                    }
-
-                    @Override
-                    public SimpleNode getASTNode() {
-                        return null;
-                    }
-
-                    @Override
-                    public void setASTNode(SimpleNode simpleNode) {
-                        // empty
-                    }
-
-                    @Override
-                    public String toString() {
-                        return value;
-                    }
-                };
-
-                expressionList.add(expression);
-            });
-            update.setExpressions(expressionList);
-        }
-
-        // where
-        List<String> wheres = getFromJson(JsonKey.WHERE);
-        if (wheres != null) {
-            Expression whereExpression = new Expression() {
-                @Override
-                public void accept(ExpressionVisitor expressionVisitor) {
-                    // empty
-                }
-
-                @Override
-                public SimpleNode getASTNode() {
-                    return null;
-                }
-
-                @Override
-                public void setASTNode(SimpleNode simpleNode) {
-                    // empty
-                }
-
-                @Override
-                public String toString() {
-                    return wheres.get(0);
-                }
-            };
-
-            update.setWhere(whereExpression);
-        }
-
-        return update;
     }
 
     private Delete getDelete() {
