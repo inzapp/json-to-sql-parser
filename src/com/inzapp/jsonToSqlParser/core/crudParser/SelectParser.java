@@ -13,8 +13,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SelectParser extends JsonManager {
-    private Select select = new Select();
     private PlainSelect plainSelect = new PlainSelect();
+
+    public Select parse(JSONObject json) {
+        setJson(json);
+        addDistinct();
+        addColumns();
+        addTable();
+        addWhere();
+        addGroupBy();
+        addOrderBy();
+        addJoins();
+        return convertSelect();
+    }
 
     private void addDistinct() {
         // distinct
@@ -214,16 +225,9 @@ public class SelectParser extends JsonManager {
         this.plainSelect.setJoins(joinList.size() == 0 ? null : joinList);
     }
 
-    public Select parse(JSONObject json) {
-        injectJson(json);
-        addDistinct();
-        addColumns();
-        addTable();
-        addWhere();
-        addGroupBy();
-        addOrderBy();
-        addJoins();
-        this.select.setSelectBody(this.plainSelect);
-        return this.select;
+    private Select convertSelect() {
+        Select select = new Select();
+        select.setSelectBody(this.plainSelect);
+        return select;
     }
 }

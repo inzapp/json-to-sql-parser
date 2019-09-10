@@ -17,7 +17,7 @@ public class UpdateParser extends JsonManager {
     private Update update = new Update();
 
     public Update parse(JSONObject json) {
-        injectJson(json);
+        setJson(json);
         addColumns();
         addTables();
         addValues();

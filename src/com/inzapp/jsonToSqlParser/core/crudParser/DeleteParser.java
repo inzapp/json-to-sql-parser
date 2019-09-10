@@ -15,7 +15,7 @@ public class DeleteParser extends JsonManager {
     private Delete delete = new Delete();
 
     public Delete parse(JSONObject json) {
-        injectJson(json);
+        setJson(json);
         addTable();
         addWhere();
         return delete;

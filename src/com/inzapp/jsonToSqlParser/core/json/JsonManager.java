@@ -13,7 +13,7 @@ public class JsonManager {
         return this.json;
     }
 
-    protected void injectJson(JSONObject json) {
+    protected void setJson(JSONObject json) {
         this.json = json;
     }
 

@@ -15,7 +15,7 @@ public class UnionSelectParser extends JsonManager {
     private List<SetOperation> setOperations = new ArrayList<>();
 
     public Select parse(JSONObject json) {
-        injectJson(json);
+        setJson(json);
         addMainJsonSelectBody();
         addUnionBodies();
         return convertSelect();
