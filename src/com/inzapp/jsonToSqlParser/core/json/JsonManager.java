@@ -13,11 +13,19 @@ public class JsonManager {
         this.json = json;
     }
 
-    protected List<String> getFromJson(String jsonKey) {
+    protected List<String> getListFromJson(String jsonKey) {
         try {
             JSONArray jsonArray = (JSONArray) this.json.get(jsonKey);
             return convertJsonArrayToList(jsonArray);
         } catch (Exception e) {
+            return null;
+        }
+    }
+
+    protected JSONObject getJsonObjectFromJson(String jsonKey) {
+        try {
+            return this.json.getJSONObject(jsonKey);
+        }catch(Exception e) {
             return null;
         }
     }

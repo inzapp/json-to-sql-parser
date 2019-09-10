@@ -14,6 +14,7 @@ import net.sf.jsqlparser.statement.delete.Delete;
 import net.sf.jsqlparser.statement.insert.Insert;
 import net.sf.jsqlparser.statement.select.*;
 import net.sf.jsqlparser.statement.update.Update;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -24,14 +25,16 @@ public class Parser extends JsonManager {
         injectJson(json);
 
         Statement statement;
-        String crud = getFromJson(JsonKey.CRUD).get(0);
+        String crud = getListFromJson(JsonKey.CRUD).get(0);
         switch (crud) {
             case JsonKey.INSERT:
                 statement = getInsert();
                 break;
 
             case JsonKey.SELECT:
-                statement = getSelect();
+                if (getJsonObjectFromJson(JsonKey.UNION + 1) != null || getJsonObjectFromJson(JsonKey.UNION_ALL + 1) != null)
+                    statement = getUnionSelect();
+                else statement = getSelect();
                 break;
 
             case JsonKey.UPDATE:
@@ -43,7 +46,7 @@ public class Parser extends JsonManager {
                 break;
 
             default:
-                System.out.println("unknown crud");
+                System.out.println("unknown crud : " + crud);
                 return null;
         }
 
@@ -54,14 +57,14 @@ public class Parser extends JsonManager {
         Insert insert = new Insert();
 
         // table
-        List<String> tables = getFromJson(JsonKey.FROM);
+        List<String> tables = getListFromJson(JsonKey.FROM);
         if (tables != null) {
             String tableName = tables.get(0);
             insert.setTable(new Table(tableName));
         }
 
         // columns
-        List<String> columns = getFromJson(JsonKey.COLUMN);
+        List<String> columns = getListFromJson(JsonKey.COLUMN);
         if (columns != null) {
             List<Column> columnList = new ArrayList<>();
             columns.forEach(column -> columnList.add(new Column(column)));
@@ -69,7 +72,7 @@ public class Parser extends JsonManager {
         }
 
         // values
-        List<String> values = getFromJson(JsonKey.VALUE);
+        List<String> values = getListFromJson(JsonKey.VALUE);
         if (values != null) {
             List<Expression> expressions = new ArrayList<>();
             values.forEach(value -> {
@@ -104,17 +107,94 @@ public class Parser extends JsonManager {
         return insert;
     }
 
+    private Select getUnionSelect() {
+        List<JSONObject> unions = new ArrayList<>();
+        int idx = 1;
+        while (true) {
+            int exceptionCnt = 0;
+            try {
+                JSONObject union = getJsonObjectFromJson(JsonKey.UNION + idx++);
+                union.put("key", JsonKey.UNION);
+                union.put("sql", new Parser().parse(union));
+                unions.add(union);
+            } catch (Exception e) {
+                --idx;
+                ++exceptionCnt;
+            }
+
+            try {
+                JSONObject unionAll = getJsonObjectFromJson(JsonKey.UNION_ALL + idx++);
+                unionAll.put("key", JsonKey.UNION_ALL);
+                unionAll.put("sql", new Parser().parse(unionAll));
+                unions.add(unionAll);
+            } catch (Exception e) {
+                --idx;
+                ++exceptionCnt;
+            }
+
+            if (exceptionCnt == 2)
+                break;
+        }
+
+        System.out.println("union size : " + unions.size());
+
+        List<Boolean> brackets = new ArrayList<>();
+        List<SelectBody> selectBodies = new ArrayList<>();
+        List<SetOperation> setOperations = new ArrayList<>();
+        unions.forEach(union -> {
+            brackets.add(true);
+
+            try {
+                String sql = (String) union.get("sql");
+                SelectBody selectBody = new SelectBody() {
+                    @Override
+                    public void accept(SelectVisitor selectVisitor) {
+                        // empty
+                    }
+
+                    @Override
+                    public String toString() {
+                        return sql;
+                    }
+                };
+                selectBodies.add(selectBody);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            try {
+                String setOperationStr = (String) union.get("key");
+                SetOperationList.SetOperationType setOperationType = SetOperationList.SetOperationType.UNION;
+                SetOperation setOperation = new SetOperation(setOperationType) {
+                    @Override
+                    public String toString() {
+                        return setOperationStr;
+                    }
+                };
+                setOperations.add(setOperation);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        SetOperationList setOperationList = new SetOperationList();
+        setOperationList.setBracketsOpsAndSelects(brackets, selectBodies, setOperations);
+        Select select = new Select();
+        select.setSelectBody(setOperationList);
+        return new Select();
+    }
+
     private Select getSelect() {
         Select select = new Select();
         PlainSelect plainSelect = new PlainSelect();
 
         // distinct
-        List<String> distincts = getFromJson(JsonKey.DISTINCT);
+        List<String> distincts = getListFromJson(JsonKey.DISTINCT);
         if (distincts != null)
             plainSelect.setDistinct(new Distinct(true));
 
         // columns
-        List<String> columns = getFromJson(JsonKey.COLUMN);
+        List<String> columns = getListFromJson(JsonKey.COLUMN);
         if (columns != null) {
             List<SelectItem> selectItemList = new ArrayList<>();
             columns.forEach(column -> {
@@ -145,7 +225,7 @@ public class Parser extends JsonManager {
         }
 
         // table
-        List<String> table = getFromJson(JsonKey.FROM);
+        List<String> table = getListFromJson(JsonKey.FROM);
         if (table != null) {
             FromItem fromItem = new FromItem() {
                 @Override
@@ -155,7 +235,7 @@ public class Parser extends JsonManager {
 
                 @Override
                 public Alias getAlias() {
-                    List<String> aliases = getFromJson(JsonKey.FROM_ALIAS);
+                    List<String> aliases = getListFromJson(JsonKey.FROM_ALIAS);
                     return aliases == null ? null : new Alias(aliases.get(0));
                 }
 
@@ -183,7 +263,7 @@ public class Parser extends JsonManager {
         }
 
         // where
-        List<String> wheres = getFromJson(JsonKey.WHERE);
+        List<String> wheres = getListFromJson(JsonKey.WHERE);
         if (wheres != null) {
             Expression whereExpression = new Expression() {
                 @Override
@@ -210,7 +290,7 @@ public class Parser extends JsonManager {
         }
 
         // group by
-        List<String> groupBys = getFromJson(JsonKey.GROUP_BY);
+        List<String> groupBys = getListFromJson(JsonKey.GROUP_BY);
         if (groupBys != null) {
             GroupByElement groupByElement = new GroupByElement();
             groupBys.forEach(groupBy -> {
@@ -241,7 +321,7 @@ public class Parser extends JsonManager {
         }
 
         // order by
-        List<String> orderBys = getFromJson(JsonKey.ORDER_BY);
+        List<String> orderBys = getListFromJson(JsonKey.ORDER_BY);
         if (orderBys != null) {
             List<OrderByElement> orderByElementList = new ArrayList<>();
             orderBys.forEach(orderBy -> {
@@ -277,10 +357,10 @@ public class Parser extends JsonManager {
         int idx = 1;
         List<Join> joinList = new ArrayList<>();
         while (true) {
-            List<String> joins = getFromJson(JsonKey.JOIN + idx++);
+            List<String> joins = getListFromJson(JsonKey.JOIN + idx++);
             if (joins != null) {
                 joins.forEach(joinStr -> {
-                    Join join = new Join(){
+                    Join join = new Join() {
                         @Override
                         public String toString() {
                             return joinStr;
@@ -300,7 +380,7 @@ public class Parser extends JsonManager {
         Update update = new Update();
 
         // columns
-        List<String> columns = getFromJson(JsonKey.COLUMN);
+        List<String> columns = getListFromJson(JsonKey.COLUMN);
         if (columns != null) {
             List<Column> columnList = new ArrayList<>();
             columns.forEach(column -> columnList.add(new Column(column)));
@@ -308,7 +388,7 @@ public class Parser extends JsonManager {
         }
 
         // tables
-        List<String> tables = getFromJson(JsonKey.FROM);
+        List<String> tables = getListFromJson(JsonKey.FROM);
         if (tables != null) {
             List<Table> tableList = new ArrayList<>();
             tables.forEach(table -> tableList.add(new Table(table)));
@@ -316,7 +396,7 @@ public class Parser extends JsonManager {
         }
 
         // values
-        List<String> values = getFromJson(JsonKey.VALUE);
+        List<String> values = getListFromJson(JsonKey.VALUE);
         if (values != null) {
             List<Expression> expressionList = new ArrayList<>();
             values.forEach(value -> {
@@ -348,7 +428,7 @@ public class Parser extends JsonManager {
         }
 
         // where
-        List<String> wheres = getFromJson(JsonKey.WHERE);
+        List<String> wheres = getListFromJson(JsonKey.WHERE);
         if (wheres != null) {
             Expression whereExpression = new Expression() {
                 @Override
@@ -382,12 +462,12 @@ public class Parser extends JsonManager {
         Delete delete = new Delete();
 
         // table
-        List<String> tables = getFromJson(JsonKey.FROM);
+        List<String> tables = getListFromJson(JsonKey.FROM);
         if (tables != null)
             delete.setTable(new Table(tables.get(0)));
 
         // where
-        List<String> wheres = getFromJson(JsonKey.WHERE);
+        List<String> wheres = getListFromJson(JsonKey.WHERE);
         if (wheres != null) {
             Expression whereExpression = new Expression() {
                 @Override

@@ -2,7 +2,6 @@ package com.inzapp.jsonToSqlParser;
 
 import com.inzapp.jsonToSqlParser.config.Config;
 import com.inzapp.jsonToSqlParser.core.Parser;
-import com.inzapp.sqlToJsonParser.SqlToJsonParser;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -20,13 +19,13 @@ public class JsonToSqlParser extends Parser {
 
         JsonToSqlParser jsonToSqlParser = new JsonToSqlParser();
         JSONObject json = jsonToSqlParser.readJsonFromFile(inputFileName);
-        if(json == null) {
+        if (json == null) {
             System.out.println("failed to load json");
             return;
         }
 
         String sql = jsonToSqlParser.parse(json);
-        if(sql == null) {
+        if (sql == null) {
             System.out.println("parse failure");
             return;
         }
@@ -39,7 +38,7 @@ public class JsonToSqlParser extends Parser {
             System.out.println("output sql\n");
             System.out.println(sql);
             System.out.println();
-        }catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -71,7 +70,7 @@ public class JsonToSqlParser extends Parser {
         try {
             FileOutputStream fos = new FileOutputStream(fileName);
             fos.write(sql.getBytes());
-        }catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
