@@ -32,7 +32,7 @@ public class Parser extends JsonManager {
                 break;
 
             case JsonKey.SELECT:
-                if (getJsonObjectFromJson(JsonKey.UNION + 1) != null || getJsonObjectFromJson(JsonKey.UNION_ALL + 1) != null)
+                if (getListFromJson(JsonKey.UNION + 1) != null || getListFromJson(JsonKey.UNION_ALL + 1) != null)
                     statement = getUnionSelect();
                 else statement = getSelect();
                 break;
@@ -108,74 +108,41 @@ public class Parser extends JsonManager {
     }
 
     private Select getUnionSelect() {
-        List<JSONObject> unions = new ArrayList<>();
         int idx = 1;
-        while (true) {
-            int exceptionCnt = 0;
-            try {
-                JSONObject union = getJsonObjectFromJson(JsonKey.UNION + idx++);
-                union.put("key", JsonKey.UNION);
-                union.put("sql", new Parser().parse(union));
-                unions.add(union);
-            } catch (Exception e) {
-                --idx;
-                ++exceptionCnt;
-            }
-
-            try {
-                JSONObject unionAll = getJsonObjectFromJson(JsonKey.UNION_ALL + idx++);
-                unionAll.put("key", JsonKey.UNION_ALL);
-                unionAll.put("sql", new Parser().parse(unionAll));
-                unions.add(unionAll);
-            } catch (Exception e) {
-                --idx;
-                ++exceptionCnt;
-            }
-
-            if (exceptionCnt == 2)
-                break;
-        }
-
-        System.out.println("union size : " + unions.size());
-
         List<Boolean> brackets = new ArrayList<>();
         List<SelectBody> selectBodies = new ArrayList<>();
         List<SetOperation> setOperations = new ArrayList<>();
-        unions.forEach(union -> {
+        // add select body of default json except union
+        while (true) {
             brackets.add(true);
+            List<String> unions = getListFromJson(JsonKey.UNION + idx);
+            List<String> unionAlls = getListFromJson(JsonKey.UNION_ALL + idx);
+            if(unions == null && unionAlls == null)
+                break;
 
-            try {
-                String sql = (String) union.get("sql");
-                SelectBody selectBody = new SelectBody() {
-                    @Override
-                    public void accept(SelectVisitor selectVisitor) {
-                        // empty
-                    }
+            SetOperation setOperation = new SetOperation(SetOperationList.SetOperationType.UNION) {
+                @Override
+                public String toString() {
+                    return unions != null ? JsonKey.UNION : JsonKey.UNION_ALL;
+                }
+            };
 
-                    @Override
-                    public String toString() {
-                        return sql;
-                    }
-                };
-                selectBodies.add(selectBody);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            SelectBody selectBody = new SelectBody() {
+                @Override
+                public void accept(SelectVisitor selectVisitor) {
+                    // empty
+                }
 
-            try {
-                String setOperationStr = (String) union.get("key");
-                SetOperationList.SetOperationType setOperationType = SetOperationList.SetOperationType.UNION;
-                SetOperation setOperation = new SetOperation(setOperationType) {
-                    @Override
-                    public String toString() {
-                        return setOperationStr;
-                    }
-                };
-                setOperations.add(setOperation);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
+                @Override
+                public String toString() {
+                    return unions != null ? unions.get(0) : unionAlls.get(0);
+                }
+            };
+
+            setOperations.add(setOperation);
+            selectBodies.add(selectBody);
+            ++idx;
+        }
 
         SetOperationList setOperationList = new SetOperationList();
         setOperationList.setBracketsOpsAndSelects(brackets, selectBodies, setOperations);

@@ -2,24 +2,28 @@
   "CRUD": ["SELECT"],
   "COLUMN": ["*"],
   "TABLE": ["TAB"],
-  "UNION 1": {
+  "UNION 1": ["SELECT * FROM TAB2"],
+  "UNION 2": ["SELECT * FROM TAB3"],
+  "UNION 4": ["SELECT * FROM TAB5"],
+  "UNION ALL 3": ["SELECT * FROM TAB4"],
+  "UNION ALL ANALYSE 3": {
+    "CRUD": ["SELECT"],
+    "COLUMN": ["*"],
+    "TABLE": ["TAB4"]
+  },
+  "UNION ANALYSE 1": {
     "CRUD": ["SELECT"],
     "COLUMN": ["*"],
     "TABLE": ["TAB2"]
   },
-  "UNION 2": {
+  "UNION ANALYSE 2": {
     "CRUD": ["SELECT"],
     "COLUMN": ["*"],
     "TABLE": ["TAB3"]
   },
-  "UNION 4": {
+  "UNION ANALYSE 4": {
     "CRUD": ["SELECT"],
     "COLUMN": ["*"],
     "TABLE": ["TAB5"]
-  },
-  "UNION ALL 3": {
-    "CRUD": ["SELECT"],
-    "COLUMN": ["*"],
-    "TABLE": ["TAB4"]
   }
 }
