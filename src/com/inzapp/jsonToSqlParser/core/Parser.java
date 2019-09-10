@@ -9,7 +9,6 @@ import org.json.JSONObject;
 public class Parser extends JsonManager {
     public String parse(JSONObject json) {
         setJson(json);
-
         Statement statement;
         String crud = getFromJson(JsonKey.CRUD).get(0);
         switch (crud) {
@@ -41,7 +40,6 @@ public class Parser extends JsonManager {
 
     public String parse(JSONObject json, boolean exceptUnion) {
         setJson(json);
-
         Statement statement;
         String crud = getFromJson(JsonKey.CRUD).get(0);
         switch (crud) {

@@ -19,13 +19,9 @@ public class InsertParser extends JsonManager {
 
     public Insert parse(JSONObject json) {
         setJson(json);
-
         addTable();
-
         addColumns();
-
         addValues();
-
         return this.insert;
     }
 
