@@ -1,6 +1,7 @@
 package com.inzapp.jsonToSqlParser.core;
 
 import com.inzapp.jsonToSqlParser.config.JsonKey;
+import com.inzapp.jsonToSqlParser.core.crudParser.InsertParser;
 import com.inzapp.jsonToSqlParser.core.json.JsonManager;
 import net.sf.jsqlparser.expression.Alias;
 import net.sf.jsqlparser.expression.Expression;
@@ -27,7 +28,7 @@ public class Parser extends JsonManager {
         String crud = getFromJson(JsonKey.CRUD).get(0);
         switch (crud) {
             case JsonKey.INSERT:
-                statement = getInsert();
+                statement = new InsertParser().parse(json);
                 break;
 
             case JsonKey.SELECT:
@@ -59,7 +60,7 @@ public class Parser extends JsonManager {
         String crud = getFromJson(JsonKey.CRUD).get(0);
         switch (crud) {
             case JsonKey.INSERT:
-                statement = getInsert();
+                statement = new InsertParser().parse(json);
                 break;
 
             case JsonKey.SELECT:

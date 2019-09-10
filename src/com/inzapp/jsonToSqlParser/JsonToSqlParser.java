@@ -9,7 +9,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 
 public class JsonToSqlParser extends Parser {
-    public static void main(String[] args) {
+    public static void main(String[] args){
         String inputFileName = Config.INPUT_FILE_NAME;
         String outputFileName = Config.OUTPUT_FILE_NAME;
         if (args != null && args.length == 2) {
