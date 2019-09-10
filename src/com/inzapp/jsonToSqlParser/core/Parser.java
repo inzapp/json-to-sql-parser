@@ -280,39 +280,12 @@ public class Parser extends JsonManager {
             List<String> joins = getFromJson(JsonKey.JOIN + idx++);
             if (joins != null) {
                 joins.forEach(joinStr -> {
-                    Join join = new Join();
-                    FromItem rightItem = new FromItem() {
-                        @Override
-                        public void accept(FromItemVisitor fromItemVisitor) {
-                            // empty
-                        }
-
-                        @Override
-                        public Alias getAlias() {
-                            return null;
-                        }
-
-                        @Override
-                        public void setAlias(Alias alias) {
-                            // empty
-                        }
-
-                        @Override
-                        public Pivot getPivot() {
-                            return null;
-                        }
-
-                        @Override
-                        public void setPivot(Pivot pivot) {
-                            // empty
-                        }
-
+                    Join join = new Join(){
                         @Override
                         public String toString() {
                             return joinStr;
                         }
                     };
-                    join.setRightItem(rightItem);
                     joinList.add(join);
                 });
             } else break;

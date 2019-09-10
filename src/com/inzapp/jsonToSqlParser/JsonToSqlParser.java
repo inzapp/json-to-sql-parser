@@ -2,6 +2,7 @@ package com.inzapp.jsonToSqlParser;
 
 import com.inzapp.jsonToSqlParser.config.Config;
 import com.inzapp.jsonToSqlParser.core.Parser;
+import com.inzapp.sqlToJsonParser.SqlToJsonParser;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -37,6 +38,7 @@ public class JsonToSqlParser extends Parser {
 
             System.out.println("output sql\n");
             System.out.println(sql);
+            sql = new SqlToJsonParser().parse(sql);
             System.out.println();
         }catch(Exception e) {
             e.printStackTrace();
