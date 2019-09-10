@@ -38,7 +38,6 @@ public class JsonToSqlParser extends Parser {
 
             System.out.println("output sql\n");
             System.out.println(sql);
-            sql = new SqlToJsonParser().parse(sql);
             System.out.println();
         }catch(Exception e) {
             e.printStackTrace();

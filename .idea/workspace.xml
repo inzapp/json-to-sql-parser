@@ -2,20 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6f48b912-9ba7-49c2-837b-6161650e479a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/SqlToJsonParser.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/SqlToJsonParser.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/input.json" beforeDir="false" afterPath="$PROJECT_DIR$/input.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/json-to-sql-parser.iml" beforeDir="false" afterPath="$PROJECT_DIR$/json-to-sql-parser.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/JsonToSqlParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/JsonToSqlParser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/config/JsonKey.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/config/JsonKey.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/Parser$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/Parser$10.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/Parser$11.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/Parser$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/Parser$7.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/Parser$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/Parser$8.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/Parser$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/Parser$9.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/Parser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/Parser.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/JsonToSqlParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/JsonToSqlParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/core/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/core/Parser.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,8 +39,8 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../sql-to-json-parser" />
     <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">

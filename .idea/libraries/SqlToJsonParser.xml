@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="SqlToJsonParser">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/SqlToJsonParser.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
