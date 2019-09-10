@@ -14,7 +14,6 @@ import net.sf.jsqlparser.statement.delete.Delete;
 import net.sf.jsqlparser.statement.insert.Insert;
 import net.sf.jsqlparser.statement.select.*;
 import net.sf.jsqlparser.statement.update.Update;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -25,14 +24,14 @@ public class Parser extends JsonManager {
         injectJson(json);
 
         Statement statement;
-        String crud = getListFromJson(JsonKey.CRUD).get(0);
+        String crud = getFromJson(JsonKey.CRUD).get(0);
         switch (crud) {
             case JsonKey.INSERT:
                 statement = getInsert();
                 break;
 
             case JsonKey.SELECT:
-                if (getListFromJson(JsonKey.UNION + 1) != null || getListFromJson(JsonKey.UNION_ALL + 1) != null)
+                if (getFromJson(JsonKey.UNION + 1) != null || getFromJson(JsonKey.UNION_ALL + 1) != null)
                     statement = getUnionSelect();
                 else statement = getSelect();
                 break;
@@ -57,7 +56,7 @@ public class Parser extends JsonManager {
         injectJson(json);
 
         Statement statement;
-        String crud = getListFromJson(JsonKey.CRUD).get(0);
+        String crud = getFromJson(JsonKey.CRUD).get(0);
         switch (crud) {
             case JsonKey.INSERT:
                 statement = getInsert();
@@ -87,14 +86,14 @@ public class Parser extends JsonManager {
         Insert insert = new Insert();
 
         // table
-        List<String> tables = getListFromJson(JsonKey.FROM);
+        List<String> tables = getFromJson(JsonKey.FROM);
         if (tables != null) {
             String tableName = tables.get(0);
             insert.setTable(new Table(tableName));
         }
 
         // columns
-        List<String> columns = getListFromJson(JsonKey.COLUMN);
+        List<String> columns = getFromJson(JsonKey.COLUMN);
         if (columns != null) {
             List<Column> columnList = new ArrayList<>();
             columns.forEach(column -> columnList.add(new Column(column)));
@@ -102,7 +101,7 @@ public class Parser extends JsonManager {
         }
 
         // values
-        List<String> values = getListFromJson(JsonKey.VALUE);
+        List<String> values = getFromJson(JsonKey.VALUE);
         if (values != null) {
             List<Expression> expressions = new ArrayList<>();
             values.forEach(value -> {
@@ -144,7 +143,7 @@ public class Parser extends JsonManager {
         List<SetOperation> setOperations = new ArrayList<>();
         // add select body of default json except union
         String mainJsonSelectBodySql = new Parser().parse(this.getJson(), true);
-        SelectBody mainJsonSelectBody = new SelectBody(){
+        SelectBody mainJsonSelectBody = new SelectBody() {
             @Override
             public void accept(SelectVisitor selectVisitor) {
                 // empty
@@ -159,9 +158,9 @@ public class Parser extends JsonManager {
 
         while (true) {
             brackets.add(true);
-            List<String> unions = getListFromJson(JsonKey.UNION + idx);
-            List<String> unionAlls = getListFromJson(JsonKey.UNION_ALL + idx);
-            if(unions == null && unionAlls == null)
+            List<String> unions = getFromJson(JsonKey.UNION + idx);
+            List<String> unionAlls = getFromJson(JsonKey.UNION_ALL + idx);
+            if (unions == null && unionAlls == null)
                 break;
 
             SetOperation setOperation = new SetOperation(SetOperationList.SetOperationType.UNION) {
@@ -200,12 +199,12 @@ public class Parser extends JsonManager {
         PlainSelect plainSelect = new PlainSelect();
 
         // distinct
-        List<String> distincts = getListFromJson(JsonKey.DISTINCT);
+        List<String> distincts = getFromJson(JsonKey.DISTINCT);
         if (distincts != null)
             plainSelect.setDistinct(new Distinct(true));
 
         // columns
-        List<String> columns = getListFromJson(JsonKey.COLUMN);
+        List<String> columns = getFromJson(JsonKey.COLUMN);
         if (columns != null) {
             List<SelectItem> selectItemList = new ArrayList<>();
             columns.forEach(column -> {
@@ -236,7 +235,7 @@ public class Parser extends JsonManager {
         }
 
         // table
-        List<String> table = getListFromJson(JsonKey.FROM);
+        List<String> table = getFromJson(JsonKey.FROM);
         if (table != null) {
             FromItem fromItem = new FromItem() {
                 @Override
@@ -246,7 +245,7 @@ public class Parser extends JsonManager {
 
                 @Override
                 public Alias getAlias() {
-                    List<String> aliases = getListFromJson(JsonKey.FROM_ALIAS);
+                    List<String> aliases = getFromJson(JsonKey.FROM_ALIAS);
                     return aliases == null ? null : new Alias(aliases.get(0));
                 }
 
@@ -274,7 +273,7 @@ public class Parser extends JsonManager {
         }
 
         // where
-        List<String> wheres = getListFromJson(JsonKey.WHERE);
+        List<String> wheres = getFromJson(JsonKey.WHERE);
         if (wheres != null) {
             Expression whereExpression = new Expression() {
                 @Override
@@ -301,7 +300,7 @@ public class Parser extends JsonManager {
         }
 
         // group by
-        List<String> groupBys = getListFromJson(JsonKey.GROUP_BY);
+        List<String> groupBys = getFromJson(JsonKey.GROUP_BY);
         if (groupBys != null) {
             GroupByElement groupByElement = new GroupByElement();
             groupBys.forEach(groupBy -> {
@@ -332,7 +331,7 @@ public class Parser extends JsonManager {
         }
 
         // order by
-        List<String> orderBys = getListFromJson(JsonKey.ORDER_BY);
+        List<String> orderBys = getFromJson(JsonKey.ORDER_BY);
         if (orderBys != null) {
             List<OrderByElement> orderByElementList = new ArrayList<>();
             orderBys.forEach(orderBy -> {
@@ -368,7 +367,7 @@ public class Parser extends JsonManager {
         int idx = 1;
         List<Join> joinList = new ArrayList<>();
         while (true) {
-            List<String> joins = getListFromJson(JsonKey.JOIN + idx++);
+            List<String> joins = getFromJson(JsonKey.JOIN + idx++);
             if (joins != null) {
                 joins.forEach(joinStr -> {
                     Join join = new Join() {
@@ -391,7 +390,7 @@ public class Parser extends JsonManager {
         Update update = new Update();
 
         // columns
-        List<String> columns = getListFromJson(JsonKey.COLUMN);
+        List<String> columns = getFromJson(JsonKey.COLUMN);
         if (columns != null) {
             List<Column> columnList = new ArrayList<>();
             columns.forEach(column -> columnList.add(new Column(column)));
@@ -399,7 +398,7 @@ public class Parser extends JsonManager {
         }
 
         // tables
-        List<String> tables = getListFromJson(JsonKey.FROM);
+        List<String> tables = getFromJson(JsonKey.FROM);
         if (tables != null) {
             List<Table> tableList = new ArrayList<>();
             tables.forEach(table -> tableList.add(new Table(table)));
@@ -407,7 +406,7 @@ public class Parser extends JsonManager {
         }
 
         // values
-        List<String> values = getListFromJson(JsonKey.VALUE);
+        List<String> values = getFromJson(JsonKey.VALUE);
         if (values != null) {
             List<Expression> expressionList = new ArrayList<>();
             values.forEach(value -> {
@@ -439,7 +438,7 @@ public class Parser extends JsonManager {
         }
 
         // where
-        List<String> wheres = getListFromJson(JsonKey.WHERE);
+        List<String> wheres = getFromJson(JsonKey.WHERE);
         if (wheres != null) {
             Expression whereExpression = new Expression() {
                 @Override
@@ -473,12 +472,12 @@ public class Parser extends JsonManager {
         Delete delete = new Delete();
 
         // table
-        List<String> tables = getListFromJson(JsonKey.FROM);
+        List<String> tables = getFromJson(JsonKey.FROM);
         if (tables != null)
             delete.setTable(new Table(tables.get(0)));
 
         // where
-        List<String> wheres = getListFromJson(JsonKey.WHERE);
+        List<String> wheres = getFromJson(JsonKey.WHERE);
         if (wheres != null) {
             Expression whereExpression = new Expression() {
                 @Override
