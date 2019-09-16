@@ -7,10 +7,25 @@ import net.sf.jsqlparser.statement.Statement;
 import org.json.JSONObject;
 
 public class Parser extends JsonManager {
+    /**
+     * head method of Parser
+     * parse json object to sql string
+     *
+     * @param json not converted json object
+     * @return converted sql string
+     */
     public String parse(JSONObject json) {
         return parse(json, false);
     }
 
+    /**
+     * only used for parsing union select
+     *
+     * @param json not converted json object
+     * @param exceptUnion if true, parse without union statement
+     *                    else, parse with union statement
+     * @return parsed sql string
+     */
     public String parse(JSONObject json, boolean exceptUnion) {
         setJson(json);
         Statement statement;
@@ -21,8 +36,7 @@ public class Parser extends JsonManager {
                 break;
 
             case JsonKey.SELECT:
-                if(exceptUnion) statement = new SelectParser().parse(json);
-                else statement = new UnionSelectParser().parse(json);
+                statement = exceptUnion ? new SelectParser().parse(json) : new UnionSelectParser().parse(json);
                 break;
 
             case JsonKey.UPDATE:

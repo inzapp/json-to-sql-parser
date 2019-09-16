@@ -13,8 +13,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SelectParser extends JsonManager {
+    /**
+     * plain select statement for return
+     */
     private PlainSelect plainSelect = new PlainSelect();
 
+    /**
+     * head method of select parser
+     *
+     * @param json not converted json object
+     * @return converted select statement
+     */
     public Select parse(JSONObject json) {
         setJson(json);
         addDistinct();
@@ -27,6 +36,9 @@ public class SelectParser extends JsonManager {
         return convertSelect();
     }
 
+    /**
+     * add distinct to select statement
+     */
     private void addDistinct() {
         // distinct
         List<String> distincts = getFromJson(JsonKey.DISTINCT);
@@ -34,6 +46,9 @@ public class SelectParser extends JsonManager {
             this.plainSelect.setDistinct(new Distinct());
     }
 
+    /**
+     * add columns to select statement
+     */
     private void addColumns() {
         // columns
         List<String> columns = getFromJson(JsonKey.COLUMN);
@@ -67,6 +82,9 @@ public class SelectParser extends JsonManager {
         }
     }
 
+    /**
+     * add table to select statement
+     */
     private void addTable() {
         // table
         List<String> table = getFromJson(JsonKey.FROM);
@@ -106,6 +124,9 @@ public class SelectParser extends JsonManager {
         }
     }
 
+    /**
+     * add where to select statement
+     */
     private void addWhere() {
         // where
         List<String> wheres = getFromJson(JsonKey.WHERE);
@@ -135,6 +156,9 @@ public class SelectParser extends JsonManager {
         }
     }
 
+    /**
+     * add group by to select statement
+     */
     private void addGroupBy() {
         // group by
         List<String> groupBys = getFromJson(JsonKey.GROUP_BY);
@@ -168,6 +192,9 @@ public class SelectParser extends JsonManager {
         }
     }
 
+    /**
+     * add order by to select statement
+     */
     private void addOrderBy() {
         // order by
         List<String> orderBys = getFromJson(JsonKey.ORDER_BY);
@@ -203,6 +230,9 @@ public class SelectParser extends JsonManager {
         }
     }
 
+    /**
+     * add joins to select statement
+     */
     private void addJoins() {
         // joins
         int idx = 1;
@@ -224,6 +254,11 @@ public class SelectParser extends JsonManager {
         this.plainSelect.setJoins(joinList.size() == 0 ? null : joinList);
     }
 
+    /**
+     * convert plain select to select statement
+     *
+     * @return converted select statement
+     */
     private Select convertSelect() {
         Select select = new Select();
         select.setSelectBody(this.plainSelect);

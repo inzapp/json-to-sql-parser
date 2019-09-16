@@ -15,8 +15,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InsertParser extends JsonManager {
+    /**
+     * insert statement for return
+     */
     private Insert insert = new Insert();
 
+    /**
+     * head method of insert parser
+     *
+     * @param json not converted json object
+     * @return converted insert statement
+     */
     public Insert parse(JSONObject json) {
         setJson(json);
         addTable();
@@ -25,6 +34,9 @@ public class InsertParser extends JsonManager {
         return this.insert;
     }
 
+    /**
+     * add table to insert statement
+     */
     private void addTable() {
         // table
         List<String> tables = getFromJson(JsonKey.FROM);
@@ -34,6 +46,9 @@ public class InsertParser extends JsonManager {
         }
     }
 
+    /**
+     * add columns to insert statement
+     */
     private void addColumns() {
         // columns
         List<String> columns = getFromJson(JsonKey.COLUMN);
@@ -44,6 +59,9 @@ public class InsertParser extends JsonManager {
         }
     }
 
+    /**
+     * add values to insert statement
+     */
     private void addValues() {
         // values
         List<String> values = getFromJson(JsonKey.VALUE);

@@ -12,8 +12,17 @@ import org.json.JSONObject;
 import java.util.List;
 
 public class DeleteParser extends JsonManager {
+    /**
+     * delete statement for return
+     */
     private Delete delete = new Delete();
 
+    /**
+     * head method of delete parser
+     *
+     * @param json not converted pure json object
+     * @return converted delete statement
+     */
     public Delete parse(JSONObject json) {
         setJson(json);
         addTable();
@@ -21,6 +30,9 @@ public class DeleteParser extends JsonManager {
         return delete;
     }
 
+    /**
+     * add table to delete statement
+     */
     private void addTable() {
         // table
         List<String> tables = getFromJson(JsonKey.FROM);
@@ -28,6 +40,9 @@ public class DeleteParser extends JsonManager {
             this.delete.setTable(new Table(tables.get(0)));
     }
 
+    /**
+     * add where to delete statement
+     */
     private void addWhere() {
         // where
         List<String> wheres = getFromJson(JsonKey.WHERE);

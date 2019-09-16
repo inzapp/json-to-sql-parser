@@ -1,7 +1,6 @@
 package com.inzapp.jsonToSqlParser;
 
 import com.inzapp.jsonToSqlParser.config.Config;
-import com.inzapp.jsonToSqlParser.config.JsonKey;
 import com.inzapp.jsonToSqlParser.core.Parser;
 import net.sf.jsqlparser.parser.CCJSqlParserUtil;
 import org.json.JSONObject;
@@ -11,6 +10,12 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 
 public class JsonToSqlParser extends Parser {
+    /**
+     * entry point in execution jar file
+     *
+     * @param args [0] : input file name, default is "input.json"
+     *             [1] : output file name, default is "output.txt"
+     */
     public static void main(String[] args) {
         String inputFileName = Config.INPUT_FILE_NAME;
         String outputFileName = Config.OUTPUT_FILE_NAME;
@@ -31,8 +36,6 @@ public class JsonToSqlParser extends Parser {
             System.out.println("parse failure");
             return;
         }
-        sql = jsonToSqlParser.removeOuterBracket(sql);
-//        sql = jsonToSqlParser.changeLine(sql);
 
         try {
             System.out.println("input json\n");
@@ -50,12 +53,15 @@ public class JsonToSqlParser extends Parser {
         System.out.println("parse success");
     }
 
+    /**
+     * head method as java library
+     *
+     * @param jsonString json string from sql
+     * @return converted sql string
+     */
     public String parse(String jsonString) {
         try {
             String sql = new Parser().parse(new JSONObject(jsonString));
-            sql = removeOuterBracket(sql);
-//            sql = changeLine(sql);
-            // TODO : auto line change
             CCJSqlParserUtil.parse(sql); // query execution test
             return sql;
         } catch (Exception e) {
@@ -63,29 +69,12 @@ public class JsonToSqlParser extends Parser {
         }
     }
 
-    private String removeOuterBracket(String sql) {
-        if (sql.charAt(0) == '(' && sql.charAt(sql.length() - 1) == ')') {
-            StringBuilder sb = new StringBuilder(sql);
-            sb.deleteCharAt(0);
-            sb.deleteCharAt(sb.length() - 1);
-            return sb.toString();
-        } else return sql;
-    }
-
-    private String changeLine(String sql) {
-        sql = sql.replaceAll(JsonKey.SELECT, JsonKey.SELECT + '\n');
-        sql = sql.replaceAll(JsonKey.UPDATE, JsonKey.UPDATE + '\n');
-//        sql = sql.replaceAll(JsonKey.DELETE, JsonKey.DELETE + '\n');
-
-        sql = sql.replaceAll("FROM", "\nFROM\n");
-        sql = sql.replaceAll("WHERE", "\nWHERE\n");
-        sql = sql.replaceAll("AND", "AND\n");
-        sql = sql.replaceAll(",", ",\n");
-        sql = sql.replaceAll("\\(", "\\(\n");
-        sql = sql.replaceAll("\\)", "\\)\n");
-        return sql;
-    }
-
+    /**
+     * read json string from file and convert is to json object
+     *
+     * @param fileName input file name, default is "input.json"
+     * @return converted json object
+     */
     private JSONObject readJsonFromFile(String fileName) {
         try {
             BufferedReader br = new BufferedReader(new FileReader(fileName));
@@ -97,7 +86,6 @@ public class JsonToSqlParser extends Parser {
 
                 sb.append(line).append('\n');
             }
-
             String jsonString = sb.toString();
             return new JSONObject(jsonString);
         } catch (Exception e) {
@@ -106,6 +94,12 @@ public class JsonToSqlParser extends Parser {
         }
     }
 
+    /**
+     * save converted sql string to file
+     *
+     * @param sql converted sql from parser
+     * @param fileName output file name, default is "output.txt"
+     */
     private void saveFile(String sql, String fileName) {
         try {
             FileOutputStream fos = new FileOutputStream(fileName);

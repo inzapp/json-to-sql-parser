@@ -14,8 +14,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UpdateParser extends JsonManager {
+    /**
+     * update statement for return
+     */
     private Update update = new Update();
 
+    /**
+     * head method of update parser
+     *
+     * @param json not converted json object
+     * @return converted update statement
+     */
     public Update parse(JSONObject json) {
         setJson(json);
         addColumns();
@@ -25,6 +34,9 @@ public class UpdateParser extends JsonManager {
         return update;
     }
 
+    /**
+     * add columns to update statement
+     */
     private void addColumns() {
         // columns
         List<String> columns = getFromJson(JsonKey.COLUMN);
@@ -35,6 +47,9 @@ public class UpdateParser extends JsonManager {
         }
     }
 
+    /**
+     * add tables to update statement
+     */
     private void addTables() {
         // tables
         List<String> tables = getFromJson(JsonKey.FROM);
@@ -45,6 +60,9 @@ public class UpdateParser extends JsonManager {
         }
     }
 
+    /**
+     * add values to update statement
+     */
     private void addValues() {
         // values
         List<String> values = getFromJson(JsonKey.VALUE);
@@ -79,6 +97,9 @@ public class UpdateParser extends JsonManager {
         }
     }
 
+    /**
+     * add where to update statement
+     */
     private void addWhere() {
         // where
         List<String> wheres = getFromJson(JsonKey.WHERE);

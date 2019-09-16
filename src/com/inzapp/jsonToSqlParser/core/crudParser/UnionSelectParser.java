@@ -10,10 +10,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UnionSelectParser extends JsonManager {
+    /**
+     * union select params
+     */
     private List<Boolean> brackets = new ArrayList<>();
     private List<SelectBody> selectBodies = new ArrayList<>();
     private List<SetOperation> setOperations = new ArrayList<>();
 
+    /**
+     * head method of union select parser
+     *
+     * @param json not converted json object
+     * @return converted select statement
+     */
     public Select parse(JSONObject json) {
         setJson(json);
         addMainJsonSelectBody();
@@ -21,6 +30,10 @@ public class UnionSelectParser extends JsonManager {
         return convertSelect();
     }
 
+    /**
+     * add main json (root json) to select body param
+     * union statement is excepted when parsing main json
+     */
     private void addMainJsonSelectBody() {
         // add select body of default json except union
         String mainJsonSelectBodySql = new Parser().parse(getJson(), true);
@@ -38,7 +51,11 @@ public class UnionSelectParser extends JsonManager {
         this.selectBodies.add(mainJsonSelectBody);
     }
 
-    private void addUnionBodies(){
+    /**
+     * add set operation param to union statement
+     * add select body param to union select body
+     */
+    private void addUnionBodies() {
         int idx = 1;
         while (true) {
             this.brackets.add(true);
@@ -72,6 +89,12 @@ public class UnionSelectParser extends JsonManager {
         }
     }
 
+    /**
+     * combine brackets, select bodies, set operations param and
+     * convert it to select statement
+     *
+     * @return converted select statement
+     */
     private Select convertSelect() {
         SetOperationList setOperationList = new SetOperationList();
         setOperationList.setBracketsOpsAndSelects(this.brackets, this.selectBodies, this.setOperations);
