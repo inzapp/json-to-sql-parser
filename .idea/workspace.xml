@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="json-to-sql-parser:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f48b912-9ba7-49c2-837b-6161650e479a" name="Default Changelist" comment="" />
+    <list default="true" id="6f48b912-9ba7-49c2-837b-6161650e479a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/selenium_api_3_13_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/selenium-api-3.13.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/input.json" beforeDir="false" afterPath="$PROJECT_DIR$/input.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/json-to-sql-parser.iml" beforeDir="false" afterPath="$PROJECT_DIR$/json-to-sql-parser.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/JsonToSqlParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/JsonToSqlParser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/JsonToSqlParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/JsonToSqlParser.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +32,13 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="vmOptionsForImporter" value="-Xmx768m" />
+      </MavenImportingSettings>
+    </option>
+  </component>
   <component name="ProjectId" id="1QaGYLLKF8b741GcUK3NzGOplho" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -25,10 +46,19 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../sql-to-json-parser" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/selenium-api-3.13.0.jar!/" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.repository.indices" />
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="open sql-to-json-parser" />
+      <command value="open dnn" />
+      <command value="mvn" />
+      <command value="mvn clean" />
+    </option>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -96,8 +126,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/JsonToSqlParser.java</url>
-          <line>33</line>
-          <option name="timeStamp" value="6" />
+          <line>38</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

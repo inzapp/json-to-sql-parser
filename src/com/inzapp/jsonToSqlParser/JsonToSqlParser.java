@@ -4,10 +4,15 @@ import com.inzapp.jsonToSqlParser.config.Config;
 import com.inzapp.jsonToSqlParser.core.Parser;
 import net.sf.jsqlparser.parser.CCJSqlParserUtil;
 import org.json.JSONObject;
+import org.openqa.selenium.JavascriptExecutor;
 
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.util.Stack;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class JsonToSqlParser extends Parser {
     /**
@@ -51,6 +56,21 @@ public class JsonToSqlParser extends Parser {
 
         jsonToSqlParser.saveFile(sql, outputFileName);
         System.out.println("parse success");
+    }
+
+    private String removeOuterBracket(String sql) {
+        if (sql.charAt(0) == '(' && sql.charAt(sql.length() - 1) == ')') {
+            Stack<Boolean> bracketStack = new Stack<>();
+            for (int i = 0; i < sql.length(); ++i) {
+                if (sql.charAt(i) == '(') bracketStack.push(true);
+                else if (sql.charAt(i) == ')') {
+                    bracketStack.pop();
+                    if (bracketStack.size() == 0 && i != sql.length() - 1)
+                        return sql;
+                }
+            }
+        } else return "";
+        return "";
     }
 
     /**
@@ -97,7 +117,7 @@ public class JsonToSqlParser extends Parser {
     /**
      * save converted sql string to file
      *
-     * @param sql converted sql from parser
+     * @param sql      converted sql from parser
      * @param fileName output file name, default is "output.txt"
      */
     private void saveFile(String sql, String fileName) {
