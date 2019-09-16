@@ -79,8 +79,7 @@ public class SelectParser extends JsonManager {
 
                 @Override
                 public Alias getAlias() {
-                    List<String> aliases = getFromJson(JsonKey.FROM_ALIAS);
-                    return aliases == null ? null : new Alias(aliases.get(0));
+                    return null;
                 }
 
                 @Override
