@@ -1,6 +1,7 @@
 package com.inzapp.jsonToSqlParser;
 
 import com.inzapp.jsonToSqlParser.config.Config;
+import com.inzapp.jsonToSqlParser.config.JsonKey;
 import com.inzapp.jsonToSqlParser.core.Parser;
 import net.sf.jsqlparser.parser.CCJSqlParserUtil;
 import org.json.JSONObject;
@@ -30,6 +31,8 @@ public class JsonToSqlParser extends Parser {
             System.out.println("parse failure");
             return;
         }
+        sql = jsonToSqlParser.removeOuterBracket(sql);
+//        sql = jsonToSqlParser.changeLine(sql);
 
         try {
             System.out.println("input json\n");
@@ -51,6 +54,7 @@ public class JsonToSqlParser extends Parser {
         try {
             String sql = new Parser().parse(new JSONObject(jsonString));
             sql = removeOuterBracket(sql);
+//            sql = changeLine(sql);
             // TODO : auto line change
             CCJSqlParserUtil.parse(sql); // query execution test
             return sql;
@@ -68,8 +72,18 @@ public class JsonToSqlParser extends Parser {
         } else return sql;
     }
 
-    private void changeLine(String sql) {
+    private String changeLine(String sql) {
+        sql = sql.replaceAll(JsonKey.SELECT, JsonKey.SELECT + '\n');
+        sql = sql.replaceAll(JsonKey.UPDATE, JsonKey.UPDATE + '\n');
+//        sql = sql.replaceAll(JsonKey.DELETE, JsonKey.DELETE + '\n');
 
+        sql = sql.replaceAll("FROM", "\nFROM\n");
+        sql = sql.replaceAll("WHERE", "\nWHERE\n");
+        sql = sql.replaceAll("AND", "AND\n");
+        sql = sql.replaceAll(",", ",\n");
+        sql = sql.replaceAll("\\(", "\\(\n");
+        sql = sql.replaceAll("\\)", "\\)\n");
+        return sql;
     }
 
     private JSONObject readJsonFromFile(String fileName) {

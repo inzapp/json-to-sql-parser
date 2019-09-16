@@ -31,7 +31,7 @@ public class SelectParser extends JsonManager {
         // distinct
         List<String> distincts = getFromJson(JsonKey.DISTINCT);
         if (distincts != null)
-            this.plainSelect.setDistinct(new Distinct(true));
+            this.plainSelect.setDistinct(new Distinct());
     }
 
     private void addColumns() {
