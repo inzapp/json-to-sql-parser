@@ -1,41 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6f48b912-9ba7-49c2-837b-6161650e479a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/inner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/inner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/input.json" beforeDir="false" afterPath="$PROJECT_DIR$/input.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/JsonToSqlParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/JsonToSqlParser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/Parser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/Parser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/DeleteParser$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/DeleteParser$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/DeleteParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/DeleteParser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/InsertParser$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/InsertParser$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/InsertParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/InsertParser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/SelectParser$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/SelectParser$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/SelectParser$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/SelectParser$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/SelectParser$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/SelectParser$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/SelectParser$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/SelectParser$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/SelectParser$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/SelectParser$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/SelectParser$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/SelectParser$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/SelectParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/SelectParser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/UnionSelectParser$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/UnionSelectParser$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/UnionSelectParser$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/UnionSelectParser$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/UnionSelectParser$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/UnionSelectParser$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/UnionSelectParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/UnionSelectParser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/UpdateParser$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/UpdateParser$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/UpdateParser$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/UpdateParser$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/UpdateParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/crudParser/UpdateParser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/json/JsonManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/json/JsonManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/JsonToSqlParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/JsonToSqlParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/core/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/core/Parser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/core/crudParser/DeleteParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/core/crudParser/DeleteParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/core/crudParser/InsertParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/core/crudParser/InsertParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/core/crudParser/SelectParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/core/crudParser/SelectParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/core/crudParser/UnionSelectParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/core/crudParser/UnionSelectParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/core/crudParser/UpdateParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/core/crudParser/UpdateParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/core/json/JsonManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/core/json/JsonManager.java" afterDir="false" />
-    </list>
+    <list default="true" id="6f48b912-9ba7-49c2-837b-6161650e479a" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +26,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../sql-to-json-parser" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
