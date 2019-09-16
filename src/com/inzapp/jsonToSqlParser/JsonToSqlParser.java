@@ -4,15 +4,11 @@ import com.inzapp.jsonToSqlParser.config.Config;
 import com.inzapp.jsonToSqlParser.core.Parser;
 import net.sf.jsqlparser.parser.CCJSqlParserUtil;
 import org.json.JSONObject;
-import org.openqa.selenium.JavascriptExecutor;
 
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.util.Stack;
-import java.util.concurrent.Callable;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 public class JsonToSqlParser extends Parser {
     /**
