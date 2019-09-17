@@ -4,6 +4,10 @@ import com.inzapp.jsonToSqlParser.core.Parser;
 import net.sf.jsqlparser.parser.CCJSqlParserUtil;
 import org.json.JSONObject;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class JsonToSqlParser extends Parser {
 //    /**
 //     * entry point in execution jar file
