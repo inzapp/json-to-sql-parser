@@ -81,7 +81,7 @@
     "WHERE SUB QUERY ANALYSE 1": {
         "CRUD": ["SELECT"],
         "COLUMN": ["EC_DV AS staff_gbn"],
-        "GROUP_BY": ["GROUP BY EC_DV"],
+        "GROUP_BY": ["EC_DV"],
         "TABLE": ["ETCH004M"],
         "UNION 1": ["SELECT EC_CLPS_DV_CD AS staff_gbn FROM ETCH005M WHERE NVL(USE_AYN, 'Y') <> 'N'"],
         "UNION ANALYSE 1": {
@@ -99,7 +99,7 @@
 {
     "CRUD": ["SELECT"],
     "COLUMN": ["EC_DV AS staff_gbn"],
-    "GROUP_BY": ["GROUP BY EC_DV"],
+    "GROUP_BY": ["EC_DV"],
     "TABLE": ["ETCH004M"],
     "UNION 1": ["SELECT EC_CLPS_DV_CD AS staff_gbn FROM ETCH005M WHERE NVL(USE_AYN, 'Y') <> 'N'"],
     "UNION ANALYSE 1": {

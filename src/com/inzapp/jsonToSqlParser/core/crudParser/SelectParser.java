@@ -188,6 +188,7 @@ public class SelectParser extends JsonManager {
                 };
                 groupByElement.addGroupByExpression(groupByExpression);
             });
+
             this.plainSelect.setGroupByElement(groupByElement);
         }
     }
