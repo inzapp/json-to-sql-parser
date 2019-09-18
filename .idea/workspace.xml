@@ -8,8 +8,10 @@
   <component name="ChangeListManager">
     <list default="true" id="6f48b912-9ba7-49c2-837b-6161650e479a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/json_to_sql_parser_jar/json-to-sql-parser.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/json_to_sql_parser_jar/json-to-sql-parser.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/JsonToSqlParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/JsonToSqlParser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/json/JsonManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/json-to-sql-parser/com/inzapp/jsonToSqlParser/core/json/JsonManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/JsonToSqlParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/JsonToSqlParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/core/json/JsonManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/core/json/JsonManager.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,7 +44,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/selenium-api-3.13.0.jar!/" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.repository.indices" />
@@ -52,6 +54,8 @@
       <command value="open dnn" />
       <command value="mvn" />
       <command value="mvn clean" />
+      <command value="open json-to-sql-parser" />
+      <command value="open sql-json-parser" />
       <command value="open sql-to-json-parser" />
     </option>
   </component>
@@ -121,7 +125,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/inzapp/jsonToSqlParser/JsonToSqlParser.java</url>
-          <line>32</line>
+          <line>30</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
